@@ -1,11 +1,35 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.scss';
+import sightingRequests from '../../helpers/data/sightingRequests'
 
 class Map extends React.Component {
+  state = {
+    locations: [],
+    sightings: []
+  }
+
+  displaySightings = () => {
+    sightingRequests.getAllSightings()
+      .then((data) => {
+        this.setState({ sightings : data });
+      }).catch(err => console.error('error getting products', err));
+  }
+
+  componentDidMount(){
+    this.displaySightings();
+  }
+
+  sightingsBuilder = () => {
+    const { sightings } = this.state;
+    const alienLanding = sightings.map(sighting => (
+      console.log(sighting)))
+      return alienLanding;
+  }
+
   render() {
     return (
-      <div className="map-container">
+      <div className="map-container"> {this.sightingsBuilder()}
       <LeafletMap
         center={[50, 10]}
         zoom={6}
