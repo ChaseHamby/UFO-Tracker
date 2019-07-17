@@ -9,15 +9,15 @@ class Map extends React.Component {
     sightings: []
   }
 
-  displaySightings = () => {
-    sightingRequests.getAllSightings()
+  displaySightingsWithLatLong = () => {
+    sightingRequests.getAllSightingsWithLatLong()
       .then((data) => {
         this.setState({ sightings : data });
       }).catch(err => console.error('error getting products', err));
   }
 
   componentDidMount(){
-    this.displaySightings();
+    this.displaySightingsWithLatLong();
   }
 
   sightingsBuilder = () => {

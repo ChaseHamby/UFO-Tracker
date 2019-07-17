@@ -22,5 +22,17 @@ namespace UFO_Tracker.Data
             }
         }
 
+        public IEnumerable<Sighting> GetAllLocationsWithSightings()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var locations = db.Query<Sighting>(@"SELECT *
+                                                    FROM Sightings
+                                                    JOIN Locations on Locations.Id = Sightings.LocationId").ToList();
+
+                return locations;
+            }
+        }
+
     }
 }

@@ -14,6 +14,18 @@ const getAllSightings = () => new Promise((resolve, reject) => {
     });
 });
 
+const getAllSightingsWithLatLong = () => new Promise((resolve, reject) => {
+    axios.get(`${apiUrl}/locationSightings`)
+    .then((result) => {
+      const sightingObject = result.data;
+      resolve(sightingObject);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
 export default {
-    getAllSightings
+    getAllSightings,
+    getAllSightingsWithLatLong
 }
