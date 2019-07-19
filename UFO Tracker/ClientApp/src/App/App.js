@@ -8,9 +8,23 @@ import {
 import Map from '../components/Map/Map';
 import './App.scss';
 
+// const PublicRoute = ({ component: Component, authed, ...rest }) => {
+//   let routeChecker = props => (authed === false
+//     ? (<Component {...props} {...rest} />)
+//     : (<Redirect to={{ pathname: '/', state: { from: props.location } }} />));
+//   return <Route {...rest} render={props => routeChecker(props)} />;
+// };
+
+// const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+//   let routeChecker = props => (authed === true
+//     ? (<Component {...props} {...rest} />)
+//     : (<Redirect to={{ pathname: '/', state: { from: props.location } }} />));
+//   return <Route {...rest} render={props => routeChecker(props)} />;
+// };
 
 export default class App extends Component {
-  displayName = App.name
+  state = {
+  }
 
   render() {
     return (
@@ -18,7 +32,7 @@ export default class App extends Component {
       <BrowserRouter>
         <React.Fragment>
           <Switch>
-            <Map />
+            {/* <Map /> */}
            <Route exact path='/' component={Map} />
           </Switch>
         </React.Fragment>

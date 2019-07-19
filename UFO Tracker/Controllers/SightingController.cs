@@ -26,5 +26,14 @@ namespace UFO_Tracker.Controllers
             return Ok(sightings);
         }
 
+        [HttpGet("locationSightings")]
+
+        public ActionResult GetAllLocationsFromSightings()
+        {
+            var locations = _sightingRepository.GetAllLocationsWithSightings();
+
+            return Ok(locations);
+        }
+
     }
 }
