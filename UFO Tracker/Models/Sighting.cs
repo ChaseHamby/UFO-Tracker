@@ -14,7 +14,9 @@ namespace UFO_Tracker.Models
         public string Shape { get; set; }
         public int LocationId { get; set; }
         public int WitnessId { get; set; }
-        public float CityLongitude { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
         public float CityLatitude { get; set; }
+        public float CityLongitude { get; set; }
     }
 }
