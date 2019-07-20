@@ -5,8 +5,9 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
 import Map from '../components/Map/Map';
-import './App.scss';
+import './App.css';
 
 // const PublicRoute = ({ component: Component, authed, ...rest }) => {
 //   let routeChecker = props => (authed === false
@@ -31,6 +32,7 @@ export default class App extends Component {
       <div className="App">
       <BrowserRouter>
         <React.Fragment>
+        <Navbar />
           <Switch>
             {/* <Map /> */}
            <Route exact path='/' component={Map} />

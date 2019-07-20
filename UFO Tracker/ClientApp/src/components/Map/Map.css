@@ -1,0 +1,16 @@
+.map-container {
+    background-color: black;
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+    background: red;
+    color: #234c5e;
+}
+
+.custom-popup .leaflet-popup-content {
+    background: red;
+}
+
+.custom-popup .leaflet-popup-tip-container {
+    background-color: black;
+}

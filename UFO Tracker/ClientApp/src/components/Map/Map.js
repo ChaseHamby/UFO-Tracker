@@ -1,6 +1,6 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import './Map.scss';
+import './Map.css';
 import sightingRequests from '../../helpers/data/sightingRequests'
 
 class Map extends React.Component {
@@ -28,7 +28,7 @@ class Map extends React.Component {
       key={sighting.id}
       position={[sighting.cityLatitude, sighting.cityLongitude]}
       >
-      <Popup
+      <Popup className='custom-popup'
       id={sighting.id}
       city={sighting.city}
       state={sighting.state}
@@ -55,6 +55,7 @@ class Map extends React.Component {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
+        className='custom-popup'
       >
         <TileLayer
           url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
