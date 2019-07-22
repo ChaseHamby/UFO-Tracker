@@ -1,11 +1,240 @@
 import React from 'react';
 import './ReportSighting.css';
 
+    const defaultSighting = {
+        witness: '',
+        dateOfEvent: '',
+        duration: '',
+        shape: '',
+        city: '',
+        state: '',
+        streetAddress: '',
+        zipcode: '',
+        cityLatitude: '',
+        cityLongitude: ''
+    }
+
 class ReportSighting extends React.Component {
 
+    state = {
+        newSighting: defaultSighting
+    }
+
+    formFieldStringState = (name, e) => {
+        e.preventDefault();
+        const tempSighting = {...this.state.newSighting};
+        tempSighting[name] = e.target.value;
+        this.setState({ newSighting: tempSighting });
+      }
+
+    formFieldNumberState = (name, e) => {
+        const tempSighting = { ...this.state.newSighting };
+        tempSighting[name] = e.target.value * 1;
+        this.setState({ newSighting: tempSighting });
+        }
+
+    // formFieldDateState = (name, e) => {
+    //     const tempSighting = { ...this.state.newSighting };
+    //     tempSighting[name] = e.target.value;
+    //     this.setState({ newSighting: tempSighting });
+    //     }
+
+    dateOfEventChange = e => this.formFieldStringState('dateOfEvent', e);
+
+    durationChange = e => this.formFieldStringState('duration', e);
+
+    shapeChange = e => this.formFieldStringState('shape', e);
+
+    cityChange = e => this.formFieldStringState('city', e);
+
+    stateChange = e => this.formFieldStringState('state', e);
+
+    streetAddressChange = e => this.formFieldStringState('streetAddress', e);
+
+    zipcodeChange = e => this.formFieldNumberState('zipcode', e);
+
+    cityLatitudeChange = e => this.formFieldNumberState('cityLatitude', e);
+
+    cityLongitudeChange = e => this.formFieldNumberState('cityLongitude', e);
+
+
+
+    formSubmit = (e) => {
+        e.preventDefault();
+        const mySighting = {...this.state.newSighting };
+        console.log(mySighting)
+        this.setState({
+          newSighting: defaultSighting,
+        });
+      };
+    
+
+
     render(){
+        const { newSighting } = this.state;
+
         return(
-            <div class="container">
+            <div>
+
+            <div class="sighting-container">
+
+            <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+            <fieldset>
+
+            <legend><center><h2><b>Report A Sighting</b></h2></center></legend>
+
+            <div class="form-group"> 
+            <label class="col-md-4 control-label">Witness</label>
+                <div class="col-md-8 selectContainer">
+                <div class="input-group">
+                    <span class="anon input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                <select name="department" class="form-control selectpicker">
+                <option value="">Were you a witness?</option>
+                <option>Yes</option>
+                <option>No</option>
+                </select>
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">Date of Event</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            <input  name="dateOfEvent" placeholder="Date of Event" class="form-control"  type="text"
+                id='dateOfEvent'
+                value={newSighting.dateOfEvent}
+                onChange={this.dateOfEventChange}
+                />
+                </div>
+            </div>
+            </div>
+
+            {/* <!-- Text input--> */}
+
+            <div class="form-group">
+            <label class="col-md-4 control-label" >Duration</label> 
+                <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            <input name="last_name" placeholder="Duration" class="form-control"  type="text" 
+                id='duration'
+                value={newSighting.duration}
+                onChange={this.durationChange}
+                />
+                </div>
+            </div>
+            </div>    
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">Shape</label>  
+                <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-screenshot"></i></span>
+            <input name="email" placeholder="Shape of Object" class="form-control"  type="text" 
+                id='shape'
+                value={newSighting.shape}
+                onChange={this.shapeChange}
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">City</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input  name="user_name" placeholder="City" class="form-control"  type="text"
+                id='city'
+                value={newSighting.city}
+                onChange={this.cityChange}  
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">State</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input  name="user_name" placeholder="State" class="form-control"  type="text" 
+                id='state'
+                value={newSighting.state}
+                onChange={this.stateChange}
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">Street Address</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input  name="user_name" placeholder="Street Address" class="form-control"  type="text" 
+                id='streetAddress'
+                value={newSighting.streetAddress}
+                onChange={this.streetAddressChange}
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">Zipcode</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input  name="user_name" placeholder="Zipcode" class="form-control"  type="text" 
+                id='zipcode'
+                value={newSighting.zipcode}
+                onChange={this.zipcodeChange}
+            />
+                </div>
+            </div>
+            </div>
+                
+            <div class="form-group">
+            <label class="col-md-4 control-label">City Latitude</label>  
+                <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input name="contact_no" placeholder="City Latitude" class="form-control" type="text" 
+                id='cityLatitude'
+                value={newSighting.cityLatitude}
+                onChange={this.cityLatitudeChange}
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">City Longitude</label>  
+                <div class="col-md-8 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+            <input name="contact_no" placeholder="City Longtude" class="form-control" type="text" 
+                id='cityLongitude'
+                value={newSighting.cityLongitude}
+                onChange={this.cityLongitudeChange}
+            />
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-5 control-label"></label>
+            <div class="col-md-4"><button class="btn btn-warning" type="submit" onClick={this.formSubmit} >Submit</button>
+            </div>
+            </div>
+            </fieldset>
+            </form>
+            </div>
+
+            <div class="contact-container">
 
                 <form class="well form-horizontal" action=" " method="post"  id="contact_form">
                 <fieldset>
@@ -105,7 +334,7 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="contact_no" placeholder="(639)" class="form-control" type="text" />
+                <input name="contact_no" placeholder="(555)555-5555" class="form-control" type="text" />
                     </div>
                 </div>
                 </div>
@@ -118,6 +347,8 @@ class ReportSighting extends React.Component {
                 </fieldset>
                 </form>
                 </div>
+
+            </div>
 
 
 

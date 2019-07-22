@@ -61,11 +61,6 @@ class Map extends React.Component {
           url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
         />
         {this.sightingsBuilder()}
-        {/* <Marker position={[50, 10]}>
-          <Popup>
-            Popup for any custom information.
-          </Popup>
-        </Marker> */}
       </LeafletMap>
       </div>
     );
