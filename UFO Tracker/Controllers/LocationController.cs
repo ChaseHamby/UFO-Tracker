@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UFO_Tracker.Data;
+using UFO_Tracker.Models;
 
 namespace UFO_Tracker.Controllers
 {
@@ -24,5 +25,29 @@ namespace UFO_Tracker.Controllers
 
             return Ok(locations);
         }
+
+        [HttpGet("{locationId}")]
+
+        public ActionResult GetSingleLocation(int Id)
+        {
+            var location = _locationRepository.GetSingleLocation(Id);
+
+            return Ok(location);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddLocation(CreateLocationRequest createRequest)
+        {
+            var newLocation = _locationRepository.AddLocation(
+                createRequest.City,
+                createRequest.State,
+                createRequest.StreetAddress,
+                createRequest.Zipcode
+                );
+
+            return Created($"api/location/{newLocation.Id}", newLocation);
+        }
+
     }
 }

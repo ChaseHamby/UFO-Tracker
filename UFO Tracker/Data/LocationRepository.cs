@@ -21,17 +21,55 @@ namespace UFO_Tracker.Data
                 return locations;
             }
         }
+        public Location AddLocation(string city, string state, string streetAddress, int zipcode)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var insertQuery = @"
+                        INSERT INTO [dbo].[Locations]
+                                   ([City]
+                                   ,[State]
+                                   ,[StreetAddress]
+                                   ,[Zipcode]
+                        )
+                        output inserted.*
+                             VALUES
+                                   (@city,
+                                    @state,
+                                    @streetAddress,
+                                    @zipcode
+                        )";
 
-        //public IEnumerable<Location> GetAllLocationsWithSightings()
-        //{
-        //    using (var db = new SqlConnection(ConnectionString))
-        //    {
-        //        var locations = db.Query<Sighting>(@"SELECT *
-        //                                            FROM Sightings
-        //                                            JOIN Locations on Locations.Id = Sightings.LocationId").ToList();
+                var parameters = new
+                {
+                    City = city,
+                    State = state,
+                    StreetAddress = streetAddress,
+                    Zipcode = zipcode,
+                };
 
-        //        return locations;
-        //    }
-        //}
+                var newLocation = db.QueryFirstOrDefault<Location>(insertQuery, parameters);
+
+                if (newLocation != null)
+                {
+                    return newLocation;
+                }
+
+                throw new Exception("Could not create location");
+            }
+        }
+
+        public Location GetSingleLocation(int Id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var singleLocation = db.QueryFirstOrDefault<Location>(@"
+                    Select * From Locations
+                    WHERE id = @id",
+                    new { Id });
+
+                return singleLocation;
+            }
+        }
     }
 }

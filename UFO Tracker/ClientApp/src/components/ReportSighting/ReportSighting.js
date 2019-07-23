@@ -1,15 +1,22 @@
-import React from 'react';
+import React from 'react'
 import './ReportSighting.css';
+import sightingRequests from '../../helpers/data/sightingRequests';
+import locationRequests from '../../helpers/data/locationRequests';
 
-    const defaultSighting = {
-        witness: '',
-        dateOfEvent: '',
-        duration: '',
-        shape: '',
+    
+    const defaultLocation = {
         city: '',
         state: '',
         streetAddress: '',
-        zipcode: '',
+        zipcode: ''
+    }
+
+    const defaultSighting = {
+        witness: '',
+        description: '',
+        dateOfEvent: '',
+        duration: '',
+        shape: '',
         cityLatitude: '',
         cityLongitude: ''
     }
@@ -17,61 +24,93 @@ import './ReportSighting.css';
 class ReportSighting extends React.Component {
 
     state = {
+        newLocation: defaultLocation,
         newSighting: defaultSighting
     }
 
-    formFieldStringState = (name, e) => {
+    formFieldStringStateSighting = (name, e) => {
         e.preventDefault();
-        const tempSighting = {...this.state.newSighting};
+        const tempSighting = {...this.state.newSighting}
         tempSighting[name] = e.target.value;
         this.setState({ newSighting: tempSighting });
       }
 
-    formFieldNumberState = (name, e) => {
+    formFieldStringStateLocation = (name, e) => {
+    e.preventDefault();
+    const tempLocation = {...this.state.newLocation};
+    tempLocation[name] = e.target.value;
+    this.setState({ newLocation: tempLocation});
+    }
+
+    formFieldNumberStateSighting = (name, e) => {
         const tempSighting = { ...this.state.newSighting };
         tempSighting[name] = e.target.value * 1;
         this.setState({ newSighting: tempSighting });
         }
 
-    // formFieldDateState = (name, e) => {
-    //     const tempSighting = { ...this.state.newSighting };
-    //     tempSighting[name] = e.target.value;
-    //     this.setState({ newSighting: tempSighting });
-    //     }
+    formFieldNumberStateLocation = (name, e) => {
+        const tempLocation = {...this.state.newLocation};
+        tempLocation[name] = e.target.value * 1;
+        this.setState({ newLocation: tempLocation});
+        }
 
-    dateOfEventChange = e => this.formFieldStringState('dateOfEvent', e);
+    descriptionChange = e => this.formFieldStringStateSighting('description', e);
 
-    durationChange = e => this.formFieldStringState('duration', e);
+    dateOfEventChange = e => this.formFieldStringStateSighting('dateOfEvent', e);
 
-    shapeChange = e => this.formFieldStringState('shape', e);
+    durationChange = e => this.formFieldStringStateSighting('duration', e);
 
-    cityChange = e => this.formFieldStringState('city', e);
+    shapeChange = e => this.formFieldStringStateSighting('shape', e);
 
-    stateChange = e => this.formFieldStringState('state', e);
+    cityChange = e => this.formFieldStringStateLocation('city', e);
 
-    streetAddressChange = e => this.formFieldStringState('streetAddress', e);
+    stateChange = e => this.formFieldStringStateLocation('state', e);
 
-    zipcodeChange = e => this.formFieldNumberState('zipcode', e);
+    streetAddressChange = e => this.formFieldStringStateLocation('streetAddress', e);
 
-    cityLatitudeChange = e => this.formFieldNumberState('cityLatitude', e);
+    zipcodeChange = e => this.formFieldNumberStateLocation('zipcode', e);
 
-    cityLongitudeChange = e => this.formFieldNumberState('cityLongitude', e);
+    cityLatitudeChange = e => this.formFieldNumberStateSighting('cityLatitude', e);
 
+    cityLongitudeChange = e => this.formFieldNumberStateSighting('cityLongitude', e);
 
+    onSubmit = () => {
+        locationRequests.addLocation()
+            .then((data) => {
+            locationRequests.getSingleLocation(data.id)
+                .then((data) => {
+                    console.log(data)
+                })
+        }).catch(err => console.error(err));
+    }
+
+                    // sightingRequests.addSighting()
+                //     .then((data) => {
+                //         console.log(data)
+                //     this.setState({
+                //         newSighting: data,
+                //         newSighting: defaultSighting,
+                //         newLocation: defaultLocation
+                //     });
 
     formSubmit = (e) => {
         e.preventDefault();
+        const myLocation = {...this.state.newLocation };
+        console.log(myLocation);
         const mySighting = {...this.state.newSighting };
         console.log(mySighting)
+        this.onSubmit(myLocation);
+        this.onSubmit(mySighting);
         this.setState({
-          newSighting: defaultSighting,
+            newLocation: defaultLocation,
+            newSighting: defaultSighting,
         });
       };
     
 
 
     render(){
-        const { newSighting } = this.state;
+        const { newSighting, newLocation } = this.state;
 
         return(
             <div>
@@ -94,6 +133,20 @@ class ReportSighting extends React.Component {
                 <option>No</option>
                 </select>
             </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label">Description</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            <input  name="dateOfEvent" placeholder="Description" class="form-control"  type="text"
+                id='description'
+                value={newSighting.description}
+                onChange={this.descriptionChange}
+                />
+                </div>
             </div>
             </div>
 
@@ -148,7 +201,7 @@ class ReportSighting extends React.Component {
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
             <input  name="user_name" placeholder="City" class="form-control"  type="text"
                 id='city'
-                value={newSighting.city}
+                value={newLocation.city}
                 onChange={this.cityChange}  
             />
                 </div>
@@ -162,7 +215,7 @@ class ReportSighting extends React.Component {
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
             <input  name="user_name" placeholder="State" class="form-control"  type="text" 
                 id='state'
-                value={newSighting.state}
+                value={newLocation.state}
                 onChange={this.stateChange}
             />
                 </div>
@@ -176,7 +229,7 @@ class ReportSighting extends React.Component {
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
             <input  name="user_name" placeholder="Street Address" class="form-control"  type="text" 
                 id='streetAddress'
-                value={newSighting.streetAddress}
+                value={newLocation.streetAddress}
                 onChange={this.streetAddressChange}
             />
                 </div>
@@ -190,7 +243,7 @@ class ReportSighting extends React.Component {
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
             <input  name="user_name" placeholder="Zipcode" class="form-control"  type="text" 
                 id='zipcode'
-                value={newSighting.zipcode}
+                value={newLocation.zipcode}
                 onChange={this.zipcodeChange}
             />
                 </div>
