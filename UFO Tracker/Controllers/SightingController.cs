@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UFO_Tracker.Data;
+using UFO_Tracker.Models;
 
 namespace UFO_Tracker.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class SightingController : ControllerBase
     {
         readonly SightingRepository _sightingRepository;
@@ -33,6 +35,14 @@ namespace UFO_Tracker.Controllers
             var locations = _sightingRepository.GetAllLocationsWithSightings();
 
             return Ok(locations);
+        }
+
+        [HttpPost]
+        public ActionResult AddSighting(CreateSightingRequest newSighting)
+        {
+            var newSightings = _sightingRepository.AddSighting(newSighting);
+
+            return Ok(newSightings);
         }
 
     }

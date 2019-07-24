@@ -34,5 +34,51 @@ namespace UFO_Tracker.Data
             }
         }
 
+        public Sighting AddSighting(CreateSightingRequest newSighting)
+        {
+            var sightingRepo = new SightingRepository();
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var insertQuery = @"
+                        INSERT INTO [dbo].[Sightings]
+                                   ([Description]
+                                   ,[DateOfEvent]
+                                   ,[Duration]
+                                   ,[Shape]
+                                   ,[CityLatitude]
+                                   ,[CityLongitude]
+                        )
+                        output inserted.*
+                             VALUES
+                                   (@description,
+                                    @dateOfEvent,
+                                    @duration,
+                                    @shape,
+                                    @cityLatitude,
+                                    @cityLongitude
+                        )";
+
+                var parameters = new
+                {
+                    Description = newSighting.Description,
+                    DateOfEvent = newSighting.DateOfEvent,
+                    Duration = newSighting.Duration,
+                    Shape = newSighting.Shape,
+                    CityLatitude = newSighting.CityLatitude,
+                    CityLongitude = newSighting.CityLongitude
+                };
+
+                var newSightings = db.QueryFirstOrDefault<Sighting>(insertQuery, parameters);
+
+                if (newSightings != null)
+                {
+                    return newSightings;
+                }
+
+                throw new Exception("Could not create sighting");
+            }
+        }
+
     }
 }

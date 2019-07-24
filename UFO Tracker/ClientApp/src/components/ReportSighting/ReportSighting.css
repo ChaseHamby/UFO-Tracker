@@ -1,0 +1,8 @@
+.well {
+    display: flex;
+    justify-content: center;
+}
+.selectpicker {
+   height: 35px !important;
+}
+

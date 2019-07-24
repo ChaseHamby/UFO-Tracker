@@ -15,7 +15,7 @@ class Navbar extends React.Component {
             <div class="navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                 <li class="nav-item mr-5">
-                    <a class="nav-linkRed" href="#">Report A Sighting</a>
+                    <a class="nav-linkRed" href="/report">Report A Sighting</a>
                 </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
