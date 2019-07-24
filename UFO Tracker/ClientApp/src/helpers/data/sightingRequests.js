@@ -25,8 +25,8 @@ const getAllSightingsWithLatLong = () => new Promise((resolve, reject) => {
     });
 });
 
-const addSighting = (newSightingObject) => new Promise((resolve, reject) => {
-  axios.post(`${apiUrl}`, newSightingObject).then((result) => {
+const addSighting = (newSighting) => new Promise((resolve, reject) => {
+  axios.post(`${apiUrl}`, newSighting).then((result) => {
     resolve(result);
   })
     .catch(error => reject(error));

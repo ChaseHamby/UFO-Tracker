@@ -9,6 +9,7 @@ using UFO_Tracker.Models;
 namespace UFO_Tracker.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class SightingController : ControllerBase
     {
         readonly SightingRepository _sightingRepository;
@@ -37,18 +38,11 @@ namespace UFO_Tracker.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSighting(CreateSightingRequest createRequest)
+        public ActionResult AddSighting(CreateSightingRequest newSighting)
         {
-            var newSighting = _sightingRepository.AddSighting(
-                createRequest.Description,
-                createRequest.DateOfEvent,
-                createRequest.Duration,
-                createRequest.Shape,
-                createRequest.CityLatitude,
-                createRequest.CityLongitude
-                );
+            var newSightings = _sightingRepository.AddSighting(newSighting);
 
-            return Created($"api/sighting/{newSighting.Id}", newSighting);
+            return Ok(newSightings);
         }
 
     }

@@ -25,7 +25,7 @@ class ReportSighting extends React.Component {
 
     state = {
         newLocation: defaultLocation,
-        newSighting: defaultSighting
+        newSighting: defaultSighting,
     }
 
     formFieldStringStateSighting = (name, e) => {
@@ -36,23 +36,23 @@ class ReportSighting extends React.Component {
       }
 
     formFieldStringStateLocation = (name, e) => {
-    e.preventDefault();
-    const tempLocation = {...this.state.newLocation};
-    tempLocation[name] = e.target.value;
-    this.setState({ newLocation: tempLocation});
+        e.preventDefault();
+        const tempLocation = {...this.state.newLocation};
+        tempLocation[name] = e.target.value;
+        this.setState({ newLocation: tempLocation});
     }
 
     formFieldNumberStateSighting = (name, e) => {
         const tempSighting = { ...this.state.newSighting };
         tempSighting[name] = e.target.value * 1;
         this.setState({ newSighting: tempSighting });
-        }
+    }
 
     formFieldNumberStateLocation = (name, e) => {
         const tempLocation = {...this.state.newLocation};
         tempLocation[name] = e.target.value * 1;
         this.setState({ newLocation: tempLocation});
-        }
+    }
 
     descriptionChange = e => this.formFieldStringStateSighting('description', e);
 
@@ -75,32 +75,29 @@ class ReportSighting extends React.Component {
     cityLongitudeChange = e => this.formFieldNumberStateSighting('cityLongitude', e);
 
     onSubmit = () => {
-        locationRequests.addLocation()
+        const {newLocation, newSighting} = this.state;
+        locationRequests.addLocation(newLocation)
             .then((data) => {
-            locationRequests.getSingleLocation(data.id)
-                .then((data) => {
-                    console.log(data)
-                })
+            // console.log(data)
+            // locationRequests.getSingleLocation(data.data.id)
+            //     .then((data) => {
+            //         console.log(data)
+                    sightingRequests.addSighting(newSighting)
+                        .then((data) => {
+                            console.log(data)
+                            this.setState({
+                                newSighting: defaultSighting,
+                                newLocation: defaultLocation
+                            });
         }).catch(err => console.error(err));
     }
-
-                    // sightingRequests.addSighting()
-                //     .then((data) => {
-                //         console.log(data)
-                //     this.setState({
-                //         newSighting: data,
-                //         newSighting: defaultSighting,
-                //         newLocation: defaultLocation
-                //     });
+)}
 
     formSubmit = (e) => {
         e.preventDefault();
         const myLocation = {...this.state.newLocation };
-        console.log(myLocation);
         const mySighting = {...this.state.newSighting };
-        console.log(mySighting)
-        this.onSubmit(myLocation);
-        this.onSubmit(mySighting);
+        this.onSubmit(myLocation, mySighting);
         this.setState({
             newLocation: defaultLocation,
             newSighting: defaultSighting,

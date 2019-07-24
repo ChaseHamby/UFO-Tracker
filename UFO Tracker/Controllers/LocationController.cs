@@ -9,6 +9,7 @@ using UFO_Tracker.Models;
 namespace UFO_Tracker.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class LocationController : ControllerBase
     {
         readonly LocationRepository _locationRepository;
@@ -26,7 +27,7 @@ namespace UFO_Tracker.Controllers
             return Ok(locations);
         }
 
-        [HttpGet("{locationId}")]
+        [HttpGet("{Id}")]
 
         public ActionResult GetSingleLocation(int Id)
         {
@@ -37,16 +38,11 @@ namespace UFO_Tracker.Controllers
 
 
         [HttpPost]
-        public ActionResult AddLocation(CreateLocationRequest createRequest)
+        public ActionResult AddLocation(CreateLocationRequest newLocation)
         {
-            var newLocation = _locationRepository.AddLocation(
-                createRequest.City,
-                createRequest.State,
-                createRequest.StreetAddress,
-                createRequest.Zipcode
-                );
+            var newLocations = _locationRepository.AddLocation(newLocation);
 
-            return Created($"api/location/{newLocation.Id}", newLocation);
+            return Ok(newLocations);
         }
 
     }

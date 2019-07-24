@@ -21,8 +21,10 @@ namespace UFO_Tracker.Data
                 return locations;
             }
         }
-        public Location AddLocation(string city, string state, string streetAddress, int zipcode)
+        public Location AddLocation(CreateLocationRequest newLocation)
         {
+            var locationRepo = new LocationRepository();
+
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
@@ -42,17 +44,17 @@ namespace UFO_Tracker.Data
 
                 var parameters = new
                 {
-                    City = city,
-                    State = state,
-                    StreetAddress = streetAddress,
-                    Zipcode = zipcode,
+                    City = newLocation.City,
+                    State = newLocation.State,
+                    StreetAddress = newLocation.StreetAddress,
+                    Zipcode = newLocation.Zipcode,
                 };
 
-                var newLocation = db.QueryFirstOrDefault<Location>(insertQuery, parameters);
+                var newLocations = db.QueryFirstOrDefault<Location>(insertQuery, parameters);
 
                 if (newLocation != null)
                 {
-                    return newLocation;
+                    return newLocations;
                 }
 
                 throw new Exception("Could not create location");

@@ -34,8 +34,10 @@ namespace UFO_Tracker.Data
             }
         }
 
-        public Sighting AddSighting(string description, string dateOfEvent, string duration, string shape, float cityLatitude, float cityLongitude)
+        public Sighting AddSighting(CreateSightingRequest newSighting)
         {
+            var sightingRepo = new SightingRepository();
+
             using (var db = new SqlConnection(ConnectionString))
             {
                 var insertQuery = @"
@@ -59,19 +61,19 @@ namespace UFO_Tracker.Data
 
                 var parameters = new
                 {
-                    Description = description,
-                    DateOfEvent = dateOfEvent,
-                    Duration = duration,
-                    Shape = shape,
-                    CityLatitude = cityLatitude,
-                    CityLongitude = cityLongitude
+                    Description = newSighting.Description,
+                    DateOfEvent = newSighting.DateOfEvent,
+                    Duration = newSighting.Duration,
+                    Shape = newSighting.Shape,
+                    CityLatitude = newSighting.CityLatitude,
+                    CityLongitude = newSighting.CityLongitude
                 };
 
-                var newSighting = db.QueryFirstOrDefault<Sighting>(insertQuery, parameters);
+                var newSightings = db.QueryFirstOrDefault<Sighting>(insertQuery, parameters);
 
-                if (newSighting != null)
+                if (newSightings != null)
                 {
-                    return newSighting;
+                    return newSightings;
                 }
 
                 throw new Exception("Could not create sighting");
