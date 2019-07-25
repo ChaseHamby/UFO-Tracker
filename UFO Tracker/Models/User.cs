@@ -11,13 +11,8 @@ namespace UFO_Tracker.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public long CellPhone { get; set; }
+        public long Cell { get; set; }
         public bool Anonymous { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string StreetAddress { get; set; }
-        public string City { get; set; }
-        public int Zipcode { get; set; }
         public int WitnessId { get; set; }
     }
 }

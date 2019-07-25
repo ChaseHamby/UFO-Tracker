@@ -21,5 +21,45 @@ namespace UFO_Tracker.Data
             }
 
         }
+
+        public User AddUser(CreateUserRequest newUser)
+        {
+            var userRepo = new UserRepository();
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var insertQuery = @"
+                        INSERT INTO [dbo].[Users]
+                                   ([FirstName]
+                                   ,[LastName]
+                                   ,[Email]
+                                   ,[Cell]
+                        )
+                        output inserted.*
+                             VALUES
+                                   (@firstName,
+                                    @lastName,
+                                    @email,
+                                    @cell
+                        )";
+
+                var parameters = new
+                {
+                    FirstName = newUser.FirstName,
+                    LastName = newUser.LastName,
+                    Email = newUser.Email,
+                    Cell = newUser.Cell
+                };
+
+                var newUsers = db.QueryFirstOrDefault<User>(insertQuery, parameters);
+
+                if (newUsers != null)
+                {
+                    return newUsers;
+                }
+
+                throw new Exception("Could not create user");
+            }
+        }
     }
 }

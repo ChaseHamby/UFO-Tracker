@@ -22,7 +22,6 @@ class Map extends React.Component {
 
   sightingsBuilder = () => {
     const { sightings } = this.state;
-    console.log(sightings);
     const alienLanding = sightings.map(sighting => (
       <Marker
       key={sighting.id}
