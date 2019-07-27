@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace UFO_Tracker.Models
+﻿namespace UFO_Tracker.Data
 {
-    public class Location
-    {
+    public class LocationSightings
+    {  
         public int Id { get; set; }
+        public string Description { get; set; }
+        public string DateOfEvent { get; set;}
         public string City { get; set; }
         public string State { get; set; }
         public string StreetAddress { get; set; }
         public int Zipcode { get; set; }
-        public string DateOfEvent { get; set; }
+
     }
 }

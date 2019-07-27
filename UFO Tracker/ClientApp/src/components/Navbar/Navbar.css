@@ -5,3 +5,8 @@
 .navbar-expand-lg {
     margin-bottom: 0px;
 }
+
+.fa-heart {
+    color: green;
+    margin-left: 10px;
+}

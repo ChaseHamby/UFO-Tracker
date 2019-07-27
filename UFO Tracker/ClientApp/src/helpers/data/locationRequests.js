@@ -38,4 +38,4 @@ export default {
     getAllLocations,
     addLocation,
     getSingleLocation
-}
+  }

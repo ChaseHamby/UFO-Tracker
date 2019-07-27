@@ -9,7 +9,8 @@ import userRequests from '../../helpers/data/userRequests';
         city: '',
         state: '',
         streetAddress: '',
-        zipcode: ''
+        zipcode: '',
+        dateOfEvent: ''
     }
 
     const defaultSighting = {
@@ -82,6 +83,8 @@ class ReportSighting extends React.Component {
 
     dateOfEventChange = e => this.formFieldStringStateSighting('dateOfEvent', e);
 
+    dateOfEventChange2 = e => this.formFieldStringStateLocation ('dateOfEvent', e);
+
     durationChange = e => this.formFieldStringStateSighting('duration', e);
 
     shapeChange = e => this.formFieldStringStateSighting('shape', e);
@@ -141,8 +144,6 @@ class ReportSighting extends React.Component {
             newUser: defaultUser
         });
       };
-    
-
 
     render(){
         const { newSighting, newLocation, newUser } = this.state;
@@ -193,7 +194,7 @@ class ReportSighting extends React.Component {
             <input  name="dateOfEvent" placeholder="Date of Event" class="form-control"  type="text"
                 id='dateOfEvent'
                 value={newSighting.dateOfEvent}
-                onChange={this.dateOfEventChange}
+                onChange={(e) => {this.dateOfEventChange(e); this.dateOfEventChange2(e);}}
                 />
                 </div>
             </div>
