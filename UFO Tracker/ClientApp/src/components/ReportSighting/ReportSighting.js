@@ -2,6 +2,7 @@ import React from 'react'
 import './ReportSighting.css';
 import sightingRequests from '../../helpers/data/sightingRequests';
 import locationRequests from '../../helpers/data/locationRequests';
+import userRequests from '../../helpers/data/userRequests';
 
     
     const defaultLocation = {
@@ -21,11 +22,21 @@ import locationRequests from '../../helpers/data/locationRequests';
         cityLongitude: ''
     }
 
+    const defaultUser = {
+        anonymous: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        cell: '',
+        witness: ''
+    }
+
 class ReportSighting extends React.Component {
 
     state = {
         newLocation: defaultLocation,
         newSighting: defaultSighting,
+        newUser: defaultUser
     }
 
     formFieldStringStateSighting = (name, e) => {
@@ -42,6 +53,13 @@ class ReportSighting extends React.Component {
         this.setState({ newLocation: tempLocation});
     }
 
+    formFieldStringStateUser = (name, e) => {
+        e.preventDefault();
+        const tempUser = {...this.state.newUser}
+        tempUser[name] = e.target.value;
+        this.setState({ newUser: tempUser });
+      }
+
     formFieldNumberStateSighting = (name, e) => {
         const tempSighting = { ...this.state.newSighting };
         tempSighting[name] = e.target.value * 1;
@@ -52,6 +70,12 @@ class ReportSighting extends React.Component {
         const tempLocation = {...this.state.newLocation};
         tempLocation[name] = e.target.value * 1;
         this.setState({ newLocation: tempLocation});
+    }
+
+    formFieldNumberStateUser = (name, e) => {
+        const tempUser = {...this.state.newUser};
+        tempUser[name] = e.target.value * 1;
+        this.setState({ newUser: tempUser});
     }
 
     descriptionChange = e => this.formFieldStringStateSighting('description', e);
@@ -74,21 +98,33 @@ class ReportSighting extends React.Component {
 
     cityLongitudeChange = e => this.formFieldNumberStateSighting('cityLongitude', e);
 
+    firstNameChange = e => this.formFieldStringStateUser('firstName', e);
+
+    lastNameChange = e => this.formFieldStringStateUser('lastName', e);
+
+    emailChange = e => this.formFieldStringStateUser('email', e);
+
+    cellChange = e => this.formFieldNumberStateUser('cell', e);
+
+
+
     onSubmit = () => {
-        const {newLocation, newSighting} = this.state;
+        const {newLocation, newSighting, newUser} = this.state;
         locationRequests.addLocation(newLocation)
             .then((data) => {
-            // console.log(data)
-            // locationRequests.getSingleLocation(data.data.id)
-            //     .then((data) => {
-            //         console.log(data)
-                    sightingRequests.addSighting(newSighting)
-                        .then((data) => {
+                console.log(data)
+                sightingRequests.addSighting(newSighting)
+                    .then((data) => {
+                    console.log(data)
+                        userRequests.addUser(newUser)
+                            .then((data) => {
                             console.log(data)
-                            this.setState({
-                                newSighting: defaultSighting,
-                                newLocation: defaultLocation
-                            });
+                                this.setState({
+                                    newSighting: defaultSighting,
+                                    newLocation: defaultLocation,
+                                    newUser: defaultUser
+                                });
+                            })
         }).catch(err => console.error(err));
     }
 )}
@@ -97,17 +133,19 @@ class ReportSighting extends React.Component {
         e.preventDefault();
         const myLocation = {...this.state.newLocation };
         const mySighting = {...this.state.newSighting };
-        this.onSubmit(myLocation, mySighting);
+        const myUser = {...this.state.newUser };
+        this.onSubmit(myLocation, mySighting, myUser);
         this.setState({
             newLocation: defaultLocation,
             newSighting: defaultSighting,
+            newUser: defaultUser
         });
       };
     
 
 
     render(){
-        const { newSighting, newLocation } = this.state;
+        const { newSighting, newLocation, newUser } = this.state;
 
         return(
             <div>
@@ -274,12 +312,6 @@ class ReportSighting extends React.Component {
                 </div>
             </div>
             </div>
-
-            <div class="form-group">
-            <label class="col-md-5 control-label"></label>
-            <div class="col-md-4"><button class="btn btn-warning" type="submit" onClick={this.formSubmit} >Submit</button>
-            </div>
-            </div>
             </fieldset>
             </form>
             </div>
@@ -310,7 +342,11 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="first_name" placeholder="First Name" class="form-control"  type="text" />
+                <input  name="first_name" placeholder="First Name" class="form-control"  type="text" 
+                    id='firstName'
+                    value={newUser.firstName}
+                    onChange={this.firstNameChange}
+                />
                     </div>
                 </div>
                 </div>
@@ -322,57 +358,25 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="last_name" placeholder="Last Name" class="form-control"  type="text" />
+                <input name="last_name" placeholder="Last Name" class="form-control"  type="text" 
+                    id='lastName'
+                    value={newUser.lastName}
+                    onChange={this.lastNameChange}
+                />
                     </div>
                 </div>
                 </div>    
-
-                <div class="form-group">
-                <label class="col-md-4 control-label">City</label>  
-                <div class="col-md-8 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="user_name" placeholder="City" class="form-control"  type="text" />
-                    </div>
-                </div>
-                </div>
-
-                <div class="form-group">
-                <label class="col-md-4 control-label">State</label>  
-                <div class="col-md-8 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="user_name" placeholder="State" class="form-control"  type="text" />
-                    </div>
-                </div>
-                </div>
-
-                <div class="form-group">
-                <label class="col-md-4 control-label">Street Address</label>  
-                <div class="col-md-8 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="user_name" placeholder="Street Address" class="form-control"  type="text" />
-                    </div>
-                </div>
-                </div>
-
-                <div class="form-group">
-                <label class="col-md-4 control-label">Zipcode</label>  
-                <div class="col-md-8 inputGroupContainer">
-                <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="user_name" placeholder="Zipcode" class="form-control"  type="text" />
-                    </div>
-                </div>
-                </div>
 
                     <div class="form-group">
                 <label class="col-md-4 control-label">E-Mail</label>  
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input name="email" placeholder="E-Mail Address" class="form-control"  type="text" />
+                <input name="email" placeholder="E-Mail Address" class="form-control"  type="text" 
+                     id='email'
+                     value={newUser.email}
+                     onChange={this.emailChange}                 
+                />
                     </div>
                 </div>
                 </div>
@@ -384,82 +388,26 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="contact_no" placeholder="(555)555-5555" class="form-control" type="text" />
+                <input name="contact_no" placeholder="(555)555-5555" class="form-control" type="text" 
+                     id='cell'
+                     value={newUser.cell}
+                     onChange={this.cellChange}                 
+                />
                     </div>
                 </div>
                 </div>
 
                 <div class="form-group">
                 <label class="col-md-5 control-label"></label>
-                <div class="col-md-4"><button type="submit" class="btn btn-warning" >Submit</button>
+                <div class="col-md-4"><button class="btn btn-warning" type="submit" onClick={this.formSubmit} >Submit</button>
                 </div>
                 </div>
                 </fieldset>
                 </form>
-                </div>
-
             </div>
-
-
-
-            /* <div class="contact-form" id="contactForm">
-            <form class="needs-validation" novalidate>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                <label for="validationTooltip01">First name</label>
-                <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" required />
-                <div class="invalid-tooltip">
-                    Please provide a first name.
-                </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                <label for="validationTooltip02">Last name</label>
-                <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" required />
-                <div class="invalid-tooltip">
-                    Please provide a last name.
-                </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                <label for="validationTooltipUsername">Username</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                    <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-                    </div>
-                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required />
-                    <div class="invalid-tooltip">
-                    Please choose a unique and valid username.
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-6 mb-3">
-                <label for="validationTooltip03">City</label>
-                <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required />
-                <div class="invalid-tooltip">
-                    Please provide a valid city.
-                </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                <label for="validationTooltip04">State</label>
-                <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required />
-                <div class="invalid-tooltip">
-                    Please provide a valid state.
-                </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                <label for="validationTooltip05">Zip</label>
-                <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required />
-                <div class="invalid-tooltip">
-                    Please provide a valid zip.
-                </div>
-                </div>
-            </div>
-            <button class="btn btn-primary" type="submit">Submit form</button>
-            </form>
-            </div> */
-        )
-    }
+        </div>
+    )
+ }
 }
 
 export default ReportSighting

@@ -14,6 +14,15 @@ const getAllUsers = () => new Promise((resolve, reject) => {
     });
 });
 
+const addUser = (newUser) => new Promise((resolve, reject) => {
+  axios.post(`${apiUrl}`, newUser).then((result) => {
+    resolve(result);
+  })
+    .catch(error => reject(error));
+});
+
+
 export default {
-    getAllUsers
+    getAllUsers,
+    addUser
 }
