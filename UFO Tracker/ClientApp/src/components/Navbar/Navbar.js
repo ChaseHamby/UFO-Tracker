@@ -2,9 +2,17 @@ import React from 'react';
 import './Navbar.css';
 
 class Navbar extends React.Component {
-
+    state = {
+        search: '',
+      };
+    
+    updateSearch = search => {
+    this.setState({ search });
+    };
 
     render() {
+        const { search } = this.state;
+
         return(
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">UFO Tracker</a>
