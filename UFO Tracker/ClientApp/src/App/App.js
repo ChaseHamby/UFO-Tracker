@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Map from '../components/Map/Map';
 import './App.css';
 import ReportSighting from '../components/ReportSighting/ReportSighting';
+import FavoriteSightings from '../components/FavoriteSightings/FavoriteSightings';
 
 // const PublicRoute = ({ component: Component, authed, ...rest }) => {
 //   let routeChecker = props => (authed === false
@@ -38,6 +39,7 @@ export default class App extends Component {
             {/* <Map /> */}
            <Route exact path='/' component={Map} />
            <Route exact path='/report' component={ReportSighting} />
+           <Route exact path='/favorites' component={FavoriteSightings} />
           </Switch>
         </React.Fragment>
       </BrowserRouter>

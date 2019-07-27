@@ -32,8 +32,15 @@ class Map extends React.Component {
       city={sighting.city}
       state={sighting.state}
       description={sighting.description}
-      > <div>{sighting.city}, {sighting.state}</div>
+      dateOfEvent={sighting.dateOfEvent}
+      duration={sighting.duration}
+      shape={sighting.shape}
+      >
         <div>{sighting.description}</div>
+        <div>Date: {sighting.dateOfEvent}</div>
+        <div>Duration: {sighting.duration}</div>
+        <div>Shape: {sighting.shape}</div>
+
       </Popup>
       </Marker>
       ));

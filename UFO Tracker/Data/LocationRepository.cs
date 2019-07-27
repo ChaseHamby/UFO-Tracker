@@ -33,13 +33,15 @@ namespace UFO_Tracker.Data
                                    ,[State]
                                    ,[StreetAddress]
                                    ,[Zipcode]
+                                   ,[DateOfEvent]
                         )
                         output inserted.*
                              VALUES
                                    (@city,
                                     @state,
                                     @streetAddress,
-                                    @zipcode
+                                    @zipcode,
+                                    @DateOfEvent
                         )";
 
                 var parameters = new
@@ -48,6 +50,7 @@ namespace UFO_Tracker.Data
                     State = newLocation.State,
                     StreetAddress = newLocation.StreetAddress,
                     Zipcode = newLocation.Zipcode,
+                    DateOfEvent = newLocation.DateOfEvent
                 };
 
                 var newLocations = db.QueryFirstOrDefault<Location>(insertQuery, parameters);

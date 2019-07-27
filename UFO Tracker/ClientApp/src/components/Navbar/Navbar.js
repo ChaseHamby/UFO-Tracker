@@ -2,9 +2,17 @@ import React from 'react';
 import './Navbar.css';
 
 class Navbar extends React.Component {
-
+    state = {
+        search: '',
+      };
+    
+    updateSearch = search => {
+    this.setState({ search });
+    };
 
     render() {
+        const { search } = this.state;
+
         return(
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">UFO Tracker</a>
@@ -20,8 +28,8 @@ class Navbar extends React.Component {
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                <a class="btn" href="/favorites"><i class="fa fa-heart fa-2x" href="/favorites"></i></a>
             </div>
         </nav>
         );
