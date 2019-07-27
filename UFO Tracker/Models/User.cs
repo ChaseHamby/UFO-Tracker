@@ -12,7 +12,7 @@ namespace UFO_Tracker.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public long Cell { get; set; }
-        public bool Anonymous { get; set; }
-        public int WitnessId { get; set; }
+        //public bool Anonymous { get; set; }
+        //public int WitnessId { get; set; }
     }
 }
