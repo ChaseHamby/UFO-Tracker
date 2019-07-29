@@ -73,7 +73,7 @@ class Map extends React.Component {
       <div className="map-container"> 
       <form class="form-inline my-lg-0 d-flex justify-content-center">
       <SearchField
-      placeholder="Search By city, state, or zip"
+      placeholder="Search by City or State"
       onChange={ this.onSearchChange }
       searchText=""
       classNames="test-class w-50"
