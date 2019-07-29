@@ -1,20 +1,28 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
+import PropTypes from 'prop-types';
+import SearchField from "react-search-field";
 import sightingRequests from '../../helpers/data/sightingRequests'
 
 class Map extends React.Component {
   state = {
     locations: [],
-    sightings: []
+    sightings: [],
+    filteredSightings: []
+  }
+
+  static propTypes = {
+    filteredSightingsBuilder: PropTypes.func
   }
 
   displaySightings = () => {
     sightingRequests.getAllSightings()
       .then((data) => {
         this.setState({ sightings : data });
-      }).catch(err => console.error('error getting products', err));
+      }).catch(err => console.error('error getting sightings', err));
   }
+
 
   componentDidMount(){
     this.displaySightings();
@@ -67,6 +75,7 @@ class Map extends React.Component {
           url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
         />
         {this.sightingsBuilder()}
+        {this.filteredSightingsBuilder}
       </LeafletMap>
       </div>
     );
