@@ -1,18 +1,12 @@
 import React from 'react';
 import './Navbar.css';
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import SearchField from "react-search-field";
+import locationSightingsRequests from '../../helpers/data/locationSightingsRequests';
 
 class Navbar extends React.Component {
-    state = {
-        search: '',
-      };
-    
-    updateSearch = search => {
-    this.setState({ search });
-    };
 
     render() {
-        const { search } = this.state;
-
         return(
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="/">UFO Tracker</a>
@@ -26,9 +20,6 @@ class Navbar extends React.Component {
                     <a class="nav-linkRed" href="/report">Report A Sighting</a>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                </form>
                 <a class="btn" href="/favorites"><i class="fa fa-heart fa-2x" href="/favorites"></i></a>
             </div>
         </nav>

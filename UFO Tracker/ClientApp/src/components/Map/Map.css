@@ -14,3 +14,7 @@
 .custom-popup .leaflet-popup-tip-container {
     background-color: black;
 }
+
+.form {
+    margin-top: 10px;
+}

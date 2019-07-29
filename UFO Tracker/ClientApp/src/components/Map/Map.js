@@ -1,45 +1,66 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
-import sightingRequests from '../../helpers/data/sightingRequests'
+import PropTypes from 'prop-types';
+import SearchField from "react-search-field";
+import locationSightingsRequests from '../../helpers/data/locationSightingsRequests'
 
 class Map extends React.Component {
   state = {
     locations: [],
-    sightings: []
+    sightings: [],
+    filteredSightings: []
   }
 
-  displaySightings = () => {
-    sightingRequests.getAllSightings()
-      .then((data) => {
-        this.setState({ sightings : data });
-      }).catch(err => console.error('error getting products', err));
+  getLocationsWithSightings = () => {
+    locationSightingsRequests.getLocationsWithSightings()
+        .then((data) => {
+            this.setState({ sightings: data})
+            this.setState({ filteredSightings: data})
+        }) 
   }
+
+  onSearchChange = (value, event) => {
+    const { sightings } = this.state;
+    const filteredSightings = [];
+    event.preventDefault();
+    if (!value) {
+        this.setState({ filteredSightings: sightings });
+    } else {
+        sightings.forEach((sighting) => {
+        if (sighting.city.toLowerCase().includes(value.toLowerCase()) || (sighting.state.toLowerCase().includes(value.toLowerCase()))) {
+            filteredSightings.push(sighting);
+        }
+        this.setState({ filteredSightings });
+        });
+        }
+    }
 
   componentDidMount(){
-    this.displaySightings();
+    this.getLocationsWithSightings();
   }
 
-  sightingsBuilder = () => {
-    const { sightings } = this.state;
-    const alienLanding = sightings.map(sighting => (
+  
+  filteredSightingsBuilder = () => {
+    const { filteredSightings } = this.state;
+    const alienLanding = filteredSightings.map(filteredSighting => (
       <Marker
-      key={sighting.id}
-      position={[sighting.cityLatitude, sighting.cityLongitude]}
+      key={filteredSighting.id}
+      position={[filteredSighting.cityLatitude, filteredSighting.cityLongitude]}
       >
       <Popup className='custom-popup'
-      id={sighting.id}
-      city={sighting.city}
-      state={sighting.state}
-      description={sighting.description}
-      dateOfEvent={sighting.dateOfEvent}
-      duration={sighting.duration}
-      shape={sighting.shape}
+      id={filteredSighting.id}
+      city={filteredSighting.city}
+      state={filteredSighting.state}
+      description={filteredSighting.description}
+      dateOfEvent={filteredSighting.dateOfEvent}
+      duration={filteredSighting.duration}
+      shape={filteredSighting.shape}
       >
-        <div>{sighting.description}</div>
-        <div>Date: {sighting.dateOfEvent}</div>
-        <div>Duration: {sighting.duration}</div>
-        <div>Shape: {sighting.shape}</div>
+        <div>{filteredSighting.description}</div>
+        <div>Date: {filteredSighting.dateOfEvent}</div>
+        <div>Duration: {filteredSighting.duration}</div>
+        <div>Shape: {filteredSighting.shape}</div>
 
       </Popup>
       </Marker>
@@ -50,6 +71,14 @@ class Map extends React.Component {
   render() {
     return (
       <div className="map-container"> 
+      <form class="form-inline my-lg-0 d-flex justify-content-center">
+      <SearchField
+      placeholder="Search by City or State"
+      onChange={ this.onSearchChange }
+      searchText=""
+      classNames="test-class w-50"
+        />
+      </form>
       <LeafletMap
         center={[35, -90]}
         zoom={4}
@@ -66,7 +95,7 @@ class Map extends React.Component {
         <TileLayer
           url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
         />
-        {this.sightingsBuilder()}
+        {this.filteredSightingsBuilder()}
       </LeafletMap>
       </div>
     );
