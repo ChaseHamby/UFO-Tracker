@@ -39,7 +39,7 @@ export default class App extends Component {
             {/* <Map /> */}
            <Route exact path='/' component={Map} />
            <Route exact path='/report' component={ReportSighting} />
-           <Route exact path='/favorites' component={FavoriteSightings} />
+           <Route exact path='/favorites' component={props => <FavoriteSightings {...props}/>}/>
           </Switch>
         </React.Fragment>
       </BrowserRouter>

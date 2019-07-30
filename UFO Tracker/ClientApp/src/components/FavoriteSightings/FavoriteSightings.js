@@ -1,42 +1,58 @@
 import React from 'react'
 import './FavoriteSightings.css';
+import PropTypes from 'prop-types';
 import sightingRequests from '../../helpers/data/sightingRequests';
-import userRequests from '../../helpers/data/userRequests';
 import locationSightingsRequests from '../../helpers/data/locationSightingsRequests';
 import SingleSighting from '../SingleSighting/SingleSighting';
+import favoriteSightingRequests from '../../helpers/data/favoriteSightingRequests'
 
     
 class FavoriteSightings extends React.Component {
 
     state = {
-        locationSightings: []
+        favoriteSightings: []
     }
 
-    getLocationsWithSightings = () => {
-        locationSightingsRequests.getLocationsWithSightings()
-            .then((data) => {
-                this.setState({ locationSightings: data})
-            })
+    // getLocationsWithSightings = () => {
+    //     locationSightingsRequests.getLocationsWithSightings()
+    //         .then((data) => {
+    //             this.setState({ locationSightings: data})
+    //         })
+    // }
+
+    getAllFavoriteSightings = () => {
+      favoriteSightingRequests.getAllFavoriteSightings()
+        .then((favoriteSightings) => {
+          this.setState({ favoriteSightings });
+        });
     }
 
     componentDidMount() {
-        this.getLocationsWithSightings();
+        this.getAllFavoriteSightings();
     }
+
+    // getAllFavoriteSightings= () => {
+    //   const { currentUser } = this.props;
+    //   favoriteSightingRequests.getAllFavoriteSightings()
+    //     .then((favoriteSightings) => {
+    //       const likedPropertiesForCurrentUser = favoriteSightings.filter(lp => lp.userId === currentUser.id);
+    //       this.setState({ favoriteSightings: likedPropertiesForCurrentUser });
+    //     });
+    // }
 
     render(){
 
-        const { locationSightings } = this.state;
+        const { favoriteSightings } = this.state;
 
-        const sightingBuilder = locationSightings.map((locationSighting) => {
+        const sightingBuilder = favoriteSightings.map((favoriteSighting) => {
             return (
               <SingleSighting
-                dateOfEvent = {locationSighting.dateOfEvent}
-                description = {locationSighting.description}
-                city={locationSighting.city}
-                state={locationSighting.state}
-                streetAddress={locationSighting.streetAddress}
-                zipcode={locationSighting.zipcode}
-                getLocationsWithSightings={this.getLocationsWithSightings}
+                dateOfEvent = {favoriteSighting.dateOfEvent}
+                description = {favoriteSighting.description}
+                city={favoriteSighting.city}
+                state={favoriteSighting.state}
+                streetAddress={favoriteSighting.streetAddress}
+                zipcode={favoriteSighting.zipcode}
               />);
           });
         return(

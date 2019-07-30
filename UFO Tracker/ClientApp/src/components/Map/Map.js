@@ -2,15 +2,24 @@ import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
 import PropTypes from 'prop-types';
+import propertiesShape from '../../helpers/propz/propertiesShape';
 import SearchField from "react-search-field";
 import locationSightingsRequests from '../../helpers/data/locationSightingsRequests'
+import LikeButton from '../LikeButton/LikeButton';
 
 class Map extends React.Component {
   state = {
     locations: [],
     sightings: [],
-    filteredSightings: []
+    filteredSightings: [],
+    isLiked: false
   }
+
+static propTypes = {
+  favoriteSighting: propertiesShape,
+  addFavoriteSightings: PropTypes.func,
+  changeIsLikedState: PropTypes.func,
+}
 
   getLocationsWithSightings = () => {
     locationSightingsRequests.getLocationsWithSightings()
@@ -61,7 +70,14 @@ class Map extends React.Component {
         <div>Date: {filteredSighting.dateOfEvent}</div>
         <div>Duration: {filteredSighting.duration}</div>
         <div>Shape: {filteredSighting.shape}</div>
-
+        <div>
+        <LikeButton
+        isLiked={ this.isLiked }
+        changeIsLikedState= { this.changeIsLikedState }
+        sightingId = { filteredSighting.id }
+        onChange = {this.addFavoriteSightings}
+        />
+        </div>
       </Popup>
       </Marker>
       ));
