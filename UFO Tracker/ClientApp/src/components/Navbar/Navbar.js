@@ -1,8 +1,5 @@
 import React from 'react';
 import './Navbar.css';
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import SearchField from "react-search-field";
-import locationSightingsRequests from '../../helpers/data/locationSightingsRequests';
 
 class Navbar extends React.Component {
 

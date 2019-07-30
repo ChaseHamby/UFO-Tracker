@@ -16,7 +16,9 @@ namespace UFO_Tracker.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sightings = db.Query<FavoriteSighting>("Select * from FavoriteSightings").ToList();
+                var sightings = db.Query<FavoriteSighting>(@"select * from favoriteSightings
+                    join sightings on sightings.id = favoriteSightings.sightingId
+                    join locations on locations.DateOfEvent = sightings.DateOfEvent").ToList();
 
                 return sightings;
             }

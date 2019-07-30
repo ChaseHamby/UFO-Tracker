@@ -12,13 +12,11 @@ class Map extends React.Component {
     locations: [],
     sightings: [],
     filteredSightings: [],
-    isLiked: false
   }
 
 static propTypes = {
   favoriteSighting: propertiesShape,
   addFavoriteSightings: PropTypes.func,
-  changeIsLikedState: PropTypes.func,
 }
 
   getLocationsWithSightings = () => {
@@ -66,18 +64,18 @@ static propTypes = {
       duration={filteredSighting.duration}
       shape={filteredSighting.shape}
       >
+        <div>
         <div>{filteredSighting.description}</div>
         <div>Date: {filteredSighting.dateOfEvent}</div>
         <div>Duration: {filteredSighting.duration}</div>
-        <div>Shape: {filteredSighting.shape}</div>
-        <div>
+        <div>Shape: {filteredSighting.shape}        
         <LikeButton
-        isLiked={ this.isLiked }
-        changeIsLikedState= { this.changeIsLikedState }
         sightingId = { filteredSighting.id }
         onChange = {this.addFavoriteSightings}
         />
         </div>
+        </div>
+        
       </Popup>
       </Marker>
       ));

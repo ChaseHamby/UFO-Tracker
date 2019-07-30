@@ -5,30 +5,9 @@ import './SingleSighting.css';
 import LikeButton from '../LikeButton/LikeButton';
 
 class SingleSighting extends React.Component {
-  state = {
-    isLiked: true,
-  }
-
-static propTypes = {
-  favoriteSighting: propertiesShape,
-  changeIsLikedState: PropTypes.func,
-  getAllFavoriteSightings: PropTypes.func,
-}
-
-changeIsLikedState = () => {
-  const { isLiked } = this.state;
-  this.setState({ isLiked: !isLiked });
-}
-
-componentDidUpdate() {
-  const { isLiked } = this.state;
-  if (isLiked === false) {
-    this.props.getAllFavoriteSightings();
-  }
-}
 
   render() {
-    const { isLiked } = this.state;
+
 
     const { favoriteSighting } = this.props;
 

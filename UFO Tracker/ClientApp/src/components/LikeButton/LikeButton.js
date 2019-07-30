@@ -8,13 +8,10 @@ class LikeButton extends React.Component {
   {
     currentFavoriteSighting: [],
     favoriteSightings: [],
-    isLiked: false,
   }
 
     static propTypes = {
-      isLiked: PropTypes.bool,
       addFavoriteSightings: PropTypes.func,
-      changeIsLikedState: PropTypes.func,
       sightingId: PropTypes.number,
     }
 
@@ -28,30 +25,17 @@ class LikeButton extends React.Component {
     componentDidMount() {
       this.getAllFavoriteSightings();
     }
-
-    changeIsLikedState = () => {
-        this.setState({ isLiked: true });
-      }
-
-    changeIsLikedStateEvent = () => {
-      const { changeIsLikedState } = this.props;
-      this.addFavoriteSightings();
-      changeIsLikedState();
-    };
-
+      
     addFavoriteSightings = () => {
-        const { sightingId, isLiked } = this.props;
+        const { sightingId } = this.props;
         const myFavoriteSighting = {
           sightingId
         };
-        if (!isLiked) {
-            favoriteSightingRequests.createFavoriteSighting(myFavoriteSighting)
-            .then((favoriteSighting) => {
-              this.setState({ currentFavoriteSighting: favoriteSighting.data });
+          favoriteSightingRequests.createFavoriteSighting(myFavoriteSighting)
+          .then((favoriteSighting) => {
+            this.setState({ currentFavoriteSighting: favoriteSighting.data });
             });
-        } else {
-        //   this.deleteFavoriteSightings();
-        }
+
       }
 
     //   deleteFavoriteSightings = () => {
@@ -67,19 +51,8 @@ class LikeButton extends React.Component {
     //   }
 
       render() {
-        const { isLiked } = this.props;
-        const makeLikedFavoriteButton = () => {
-          if (isLiked === false) {
-            return (
-                <button className="btn" onClick={this.addFavoriteSightings}><i id="!isLiked" className="far fa-heart fa-2x"/></button>
-            );
-          }
           return (
-                <button className="btn float-right" onClick={this.changeIsLikedStateEvent}><i id="isLiked" className="fas fa-heart fa-2x"/></button>
-          );
-        };
-        return (
-            <div className="float-right">{makeLikedFavoriteButton()}</div>
+            <button className="btn" onClick={this.addFavoriteSightings}><i className="far fa-heart fa-2x"/></button>
         );
       }
 }
