@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import propertiesShape from '../../helpers/propz/propertiesShape';
 import './SingleSighting.css';
+import LikeButton from '../LikeButton/LikeButton';
 
 class SingleSighting extends React.Component {
 
   render() {
 
-    const { locatingSighting } = this.props;
+
+    const { favoriteSighting } = this.props;
 
     return (
       <tr>
@@ -18,6 +22,8 @@ class SingleSighting extends React.Component {
             </div>
         </td>
         <td>{this.props.description}</td>
+        <div className=" button">
+        </div>    
       </tr>
     );
   }

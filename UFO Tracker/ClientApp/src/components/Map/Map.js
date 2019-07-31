@@ -2,15 +2,23 @@ import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
 import PropTypes from 'prop-types';
+import propertiesShape from '../../helpers/propz/propertiesShape';
 import SearchField from "react-search-field";
 import locationSightingsRequests from '../../helpers/data/locationSightingsRequests'
+import LikeButton from '../LikeButton/LikeButton';
+import L from 'leaflet'
 
 class Map extends React.Component {
   state = {
     locations: [],
     sightings: [],
-    filteredSightings: []
+    filteredSightings: [],
   }
+
+static propTypes = {
+  favoriteSighting: propertiesShape,
+  addFavoriteSightings: PropTypes.func,
+}
 
   getLocationsWithSightings = () => {
     locationSightingsRequests.getLocationsWithSightings()
@@ -39,13 +47,20 @@ class Map extends React.Component {
   componentDidMount(){
     this.getLocationsWithSightings();
   }
-
   
   filteredSightingsBuilder = () => {
     const { filteredSightings } = this.state;
+    
+    const icon =  L.icon({
+        iconUrl: 'https://cdn4.iconfinder.com/data/icons/animals-wildlife-color-1/128/alien-face-green-2-512.png',
+        iconSize: [15, 20],
+        iconAnchor: [3, 6],
+        popupAnchor: [0, -16],
+    }); 
     const alienLanding = filteredSightings.map(filteredSighting => (
       <Marker
       key={filteredSighting.id}
+      icon={icon}      
       position={[filteredSighting.cityLatitude, filteredSighting.cityLongitude]}
       >
       <Popup className='custom-popup'
@@ -57,11 +72,19 @@ class Map extends React.Component {
       duration={filteredSighting.duration}
       shape={filteredSighting.shape}
       >
+        <div>
         <div>{filteredSighting.description}</div>
         <div>Date: {filteredSighting.dateOfEvent}</div>
+        <div>Location: {filteredSighting.city}, {filteredSighting.state}</div>
         <div>Duration: {filteredSighting.duration}</div>
-        <div>Shape: {filteredSighting.shape}</div>
-
+        <div>Shape: {filteredSighting.shape}        
+        <LikeButton
+        sightingId = { filteredSighting.id }
+        onChange = {this.addFavoriteSightings}
+        />
+        </div>
+        </div>
+        
       </Popup>
       </Marker>
       ));
@@ -69,6 +92,7 @@ class Map extends React.Component {
   }
 
   render() {
+
     return (
       <div className="map-container"> 
       <form class="form-inline my-lg-0 d-flex justify-content-center">
@@ -82,7 +106,7 @@ class Map extends React.Component {
       <LeafletMap
         center={[35, -90]}
         zoom={4}
-        maxZoom={15}
+        maxZoom={8}
         attributionControl={true}
         zoomControl={true}
         doubleClickZoom={true}
@@ -90,6 +114,12 @@ class Map extends React.Component {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
+        maxBounds={[
+          //south west
+          [22.712, -94.227],
+          //north east
+          [56.774, -104.125]
+          ]}
         className='custom-popup'
       >
         <TileLayer

@@ -115,13 +115,10 @@ class ReportSighting extends React.Component {
         const {newLocation, newSighting, newUser} = this.state;
         locationRequests.addLocation(newLocation)
             .then((data) => {
-                console.log(data)
                 sightingRequests.addSighting(newSighting)
                     .then((data) => {
-                    console.log(data)
                         userRequests.addUser(newUser)
                             .then((data) => {
-                            console.log(data)
                                 this.setState({
                                     newSighting: defaultSighting,
                                     newLocation: defaultLocation,
@@ -157,20 +154,6 @@ class ReportSighting extends React.Component {
             <fieldset>
 
             <legend><center><h2><b>Report A Sighting</b></h2></center></legend>
-
-            <div class="form-group"> 
-            <label class="col-md-4 control-label">Witness</label>
-                <div class="col-md-8 selectContainer">
-                <div class="input-group">
-                    <span class="anon input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                <select name="department" class="form-control selectpicker">
-                <option value="">Were you a witness?</option>
-                <option>Yes</option>
-                <option>No</option>
-                </select>
-            </div>
-            </div>
-            </div>
 
             <div class="form-group">
             <label class="col-md-4 control-label">Description</label>  
@@ -323,20 +306,6 @@ class ReportSighting extends React.Component {
                 <fieldset>
 
                 <legend><center><h2><b>Contact Information</b></h2></center></legend>
-
-                <div class="form-group"> 
-                <label class="col-md-4 control-label">Anonymity</label>
-                    <div class="col-md-8 selectContainer">
-                    <div class="input-group">
-                        <span class="anon input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                    <select name="department" class="form-control selectpicker">
-                    <option value="">Submit as anonymous?</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                    </select>
-                </div>
-                </div>
-                </div>
 
                 <div class="form-group">
                 <label class="col-md-4 control-label">First Name</label>  
