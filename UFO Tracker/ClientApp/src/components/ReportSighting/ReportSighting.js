@@ -20,7 +20,8 @@ import userRequests from '../../helpers/data/userRequests';
         duration: '',
         shape: '',
         cityLatitude: '',
-        cityLongitude: ''
+        cityLongitude: '',
+        image: ''
     }
 
     const defaultUser = {
@@ -100,6 +101,8 @@ class ReportSighting extends React.Component {
     cityLatitudeChange = e => this.formFieldNumberStateSighting('cityLatitude', e);
 
     cityLongitudeChange = e => this.formFieldNumberStateSighting('cityLongitude', e);
+
+    imageChange = e => this.formFieldStringStateSighting('image', e);
 
     firstNameChange = e => this.formFieldStringStateUser('firstName', e);
 
@@ -293,6 +296,20 @@ class ReportSighting extends React.Component {
                 value={newSighting.cityLongitude}
                 onChange={this.cityLongitudeChange}
             />
+                </div>
+            </div>
+            </div>
+            
+            <div class="form-group">
+            <label class="col-md-4 control-label">ImageURL</label>  
+            <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            <input  name="image" placeholder="Image URL" class="form-control"  type="text"
+                id='image'
+                value={newSighting.image}
+                onChange={this.imageChange}
+                />
                 </div>
             </div>
             </div>

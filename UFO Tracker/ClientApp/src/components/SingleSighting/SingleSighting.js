@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import propertiesShape from '../../helpers/propz/propertiesShape';
 import './SingleSighting.css';
 import LikeButton from '../LikeButton/LikeButton';
+import favoriteSightingRequests from '../../helpers/data/favoriteSightingRequests'
 
 class SingleSighting extends React.Component {
 
   render() {
-
-
-    const { favoriteSighting } = this.props;
 
     return (
       <tr>
@@ -22,8 +20,7 @@ class SingleSighting extends React.Component {
             </div>
         </td>
         <td>{this.props.description}</td>
-        <div className=" button">
-        </div>    
+        <td> <button id={this.props.sightingId} className="btn-primary" onClick={this.props.deleteFavoriteSighting}>Remove</button></td>
       </tr>
     );
   }

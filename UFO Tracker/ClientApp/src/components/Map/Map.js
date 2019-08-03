@@ -73,16 +73,16 @@ static propTypes = {
       shape={filteredSighting.shape}
       >
         <div>
-        <div>{filteredSighting.description}</div>
-        <div>Date: {filteredSighting.dateOfEvent}</div>
-        <div>Location: {filteredSighting.city}, {filteredSighting.state}</div>
-        <div>Duration: {filteredSighting.duration}</div>
-        <div>Shape: {filteredSighting.shape}        
         <LikeButton
         sightingId = { filteredSighting.id }
         onChange = {this.addFavoriteSightings}
         />
-        </div>
+        <img className='popImage' src={filteredSighting.image}></img>
+        <div>{filteredSighting.description}</div>
+        <div>Date: {filteredSighting.dateOfEvent}</div>
+        <div>Location: {filteredSighting.city}, {filteredSighting.state}</div>
+        <div>Duration: {filteredSighting.duration}</div>
+        <div>Shape: {filteredSighting.shape}</div>
         </div>
         
       </Popup>
@@ -116,9 +116,9 @@ static propTypes = {
         easeLinearity={0.35}
         maxBounds={[
           //south west
-          [22.712, -94.227],
+          [10.712, -94.227],
           //north east
-          [56.774, -104.125]
+          [86.774, -104.125]
           ]}
         className='custom-popup'
       >

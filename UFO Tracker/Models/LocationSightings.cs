@@ -13,6 +13,7 @@
         public int Zipcode { get; set; }
         public float CityLongitude { get; set; }
         public float CityLatitude { get; set; }
+        public string Image { get; set; }
 
     }
 }

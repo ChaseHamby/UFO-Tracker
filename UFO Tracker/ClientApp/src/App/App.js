@@ -29,7 +29,16 @@ export default class App extends Component {
   state = {
   }
 
+  //     const imageBuilder = () => filteredSightings.map(filteredSighting => {
+//       if (filteredSighting.image.length > 0) {
+//         return <img className='popImage' src={filteredSighting.image}></img>;
+//     } else {
+//       return null;
+//   }
+// });
+
   render() {
+
     return (
       <div className="App">
       <BrowserRouter>

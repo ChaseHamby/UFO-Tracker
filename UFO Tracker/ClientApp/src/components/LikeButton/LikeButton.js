@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import favoriteSightingRequests from '../../helpers/data/favoriteSightingRequests';
 import './LikeButton.css';
+import Swal from 'sweetalert2';
 
 class LikeButton extends React.Component {
   state =
@@ -32,27 +33,27 @@ class LikeButton extends React.Component {
           sightingId
         };
           favoriteSightingRequests.createFavoriteSighting(myFavoriteSighting)
+          Swal.fire({
+            title: 'Sighting added!',
+            width: 400,
+            padding: '3em',
+            background: '#fff url(http://stmedia.stimg.co/ctyp-news-032719-Galactic-Portal.jpg?w=800)',
+            backdrop: `
+              rgba(33,0,66,0.4)
+              center left
+              no-repeat
+            `
+          })
           .then((favoriteSighting) => {
             this.setState({ currentFavoriteSighting: favoriteSighting.data });
             });
 
       }
 
-    //   deleteFavoriteSightings = () => {
-    //     const { sightingId } = this.props;
-    //     favoriteSightingRequests.getAllLikedPropertiesWithUser()
-    //       .then((favoriteSightings) => {
-    //         const filterMatchingProperty = likedProperties.filter(lp => lp.userId === userId && lp.propertyId === propertyId);
-    //         const likedPropertyId = filterMatchingProperty[0].id;
-    //         likedPropertyRequests.deleteLikedProperty(likedPropertyId)
-    //           .then(() => {
-    //           });
-    //       });
-    //   }
-
       render() {
+        
           return (
-            <button className="btn" onClick={this.addFavoriteSightings}><i className="far fa-heart fa-2x"/></button>
+            <button className="heart btn float-right mb-3" onClick={this.addFavoriteSightings}><i className="fa fa-heart fa-2x"/></button>
         );
       }
 }

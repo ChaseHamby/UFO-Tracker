@@ -20,7 +20,8 @@
     "react-scripts": "1.0.17",
     "react-search-field": "^1.0.0",
     "reactstrap": "^8.0.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sweetalert2": "^8.15.0"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

@@ -13,12 +13,20 @@ class FavoriteSightings extends React.Component {
     getAllFavoriteSightings = () => {
       favoriteSightingRequests.getAllFavoriteSightings()
         .then((favoriteSightings) => {
+          console.log(favoriteSightings)
           this.setState({ favoriteSightings });
         });
     }
 
     componentDidMount() {
         this.getAllFavoriteSightings();
+    }
+
+    deleteFavoriteSighting = (e) => {
+      favoriteSightingRequests.deleteFavoriteSighting(e.currentTarget.id)
+      .then(() => {
+        this.getAllFavoriteSightings()
+      });
     }
 
     render(){
@@ -28,12 +36,14 @@ class FavoriteSightings extends React.Component {
         const sightingBuilder = favoriteSightings.map((favoriteSighting) => {
             return (
               <SingleSighting
+                sightingId = {favoriteSighting.sightingId}
                 dateOfEvent = {favoriteSighting.dateOfEvent}
                 description = {favoriteSighting.description}
                 city={favoriteSighting.city}
                 state={favoriteSighting.state}
                 streetAddress={favoriteSighting.streetAddress}
                 zipcode={favoriteSighting.zipcode}
+                deleteFavoriteSighting={this.deleteFavoriteSighting}
               />);
           });
         return(
@@ -44,6 +54,7 @@ class FavoriteSightings extends React.Component {
                   <th>Date of Event</th>
                   <th>Location</th>
                   <th>Description</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

@@ -43,13 +43,13 @@ namespace UFO_Tracker.Data
             throw new Exception("No newFavoriteSighting created");
         }
 
-        public void DeleteFavoriteSighting(int id)
+        public void DeleteFavoriteSighting(int SightingId)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var parameter = new { Id = id };
+                var parameter = new { SightingId = SightingId };
 
-                var deleteQuery = "Delete From FavoriteSightings where Id = @id";
+                var deleteQuery = "Delete From FavoriteSightings where SightingId = @SightingId";
 
                 var rowsAffected = db.Execute(deleteQuery, parameter);
 
@@ -57,6 +57,19 @@ namespace UFO_Tracker.Data
                 {
                     throw new Exception("Did not delete");
                 }
+            }
+        }
+
+        public FavoriteSighting GetSingleFavoriteSighting(int SightingId)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var favoriteSighting = db.QueryFirstOrDefault<FavoriteSighting>(@"
+                    Select * From FavoriteSightings
+                    WHERE sightingId = @sightingId",
+                    new { SightingId });
+
+                return favoriteSighting;
             }
         }
     }
