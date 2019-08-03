@@ -10,7 +10,7 @@ class SingleSighting extends React.Component {
   render() {
 
     return (
-      <tr>
+      <tr className="sightContainer">
         <td>{this.props.dateOfEvent}</td>
         <td>
             <div>

@@ -1,8 +1,19 @@
 .well {
     display: flex;
     justify-content: center;
+    opacity: 0.7;
 }
+
 .selectpicker {
    height: 35px !important;
 }
 
+.form {
+    opacity: 0.2;
+}
+
+.all {
+    background: url(https://www.bibliotecapleyades.net/imagenes_ciencia/flyingobjects33_04.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -149,7 +149,8 @@ class ReportSighting extends React.Component {
         const { newSighting, newLocation, newUser } = this.state;
 
         return(
-            <div>
+            <div className="all">
+            <div className= "container">
 
             <div class="sighting-container">
 
@@ -392,6 +393,7 @@ class ReportSighting extends React.Component {
                 </fieldset>
                 </form>
             </div>
+        </div>
         </div>
     )
  }

@@ -47,7 +47,7 @@ class FavoriteSightings extends React.Component {
               />);
           });
         return(
-            <div>
+            <div className="sightingContainer">
             <table className="table table-striped table-hover table-light mt-5">
               <thead>
                 <tr>

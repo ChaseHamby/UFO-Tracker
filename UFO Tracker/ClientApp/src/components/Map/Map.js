@@ -100,7 +100,7 @@ static propTypes = {
       placeholder="Search by City or State"
       onChange={ this.onSearchChange }
       searchText=""
-      classNames="test-class w-50"
+      classNames="test-class w-40 mt-3"
         />
       </form>
       <LeafletMap
@@ -114,12 +114,6 @@ static propTypes = {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
-        maxBounds={[
-          //south west
-          [10.712, -94.227],
-          //north east
-          [86.774, -104.125]
-          ]}
         className='custom-popup'
       >
         <TileLayer
