@@ -19,6 +19,15 @@ namespace UFO_Tracker.Controllers
             _favoriteSightingRepository = new FavoriteSightingRepository();
         }
 
+        [HttpGet("{SightingId}")]
+
+        public ActionResult GetSingleFavoriteSighting(int SightingId)
+        {
+            var sighting = _favoriteSightingRepository.GetSingleFavoriteSighting(SightingId);
+
+            return Ok(sighting);
+        }
+
         [HttpPost]
         public ActionResult AddFavoriteSighting(CreateFavoriteSightingsRequest createRequest)
         {
@@ -29,10 +38,10 @@ namespace UFO_Tracker.Controllers
 
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult DeleteLikedProperty(int id)
+        [HttpDelete("{SightingId}")]
+        public ActionResult DeleteLikedProperty(int SightingId)
         {
-            _favoriteSightingRepository.DeleteFavoriteSighting(id);
+            _favoriteSightingRepository.DeleteFavoriteSighting(SightingId);
 
             return Ok("Goodnight...");
         }
@@ -44,13 +53,5 @@ namespace UFO_Tracker.Controllers
 
             return Ok(favoriteSightings);
         }
-
-        //[HttpGet("{id}")]
-        //public ActionResult GetSingleFavoriteSighting(int id)
-        //{
-        //    var favoriteSightingById = _favoriteSightingRepository.GetSingleFavoriteSighting(id);
-
-        //    return Ok(favoriteSightingById);
-        //}
     }
 }

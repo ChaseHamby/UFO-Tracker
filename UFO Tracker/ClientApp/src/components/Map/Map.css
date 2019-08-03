@@ -16,9 +16,9 @@
     background-color: black;
 }
 
-.leaflet-pane .leaflet-marker-pane {
-    height: 15px;
-    width: 10px;
+.popImage {
+    height: 150px;
+    width: 300px;
 }
 
 .form {

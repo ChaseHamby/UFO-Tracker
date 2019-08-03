@@ -48,6 +48,7 @@ namespace UFO_Tracker.Data
                                    ,[Shape]
                                    ,[CityLatitude]
                                    ,[CityLongitude]
+                                   ,[Image]
                         )
                         output inserted.*
                              VALUES
@@ -56,7 +57,8 @@ namespace UFO_Tracker.Data
                                     @duration,
                                     @shape,
                                     @cityLatitude,
-                                    @cityLongitude
+                                    @cityLongitude,
+                                    @image
                         )";
 
                 var parameters = new
@@ -66,7 +68,8 @@ namespace UFO_Tracker.Data
                     Duration = newSighting.Duration,
                     Shape = newSighting.Shape,
                     CityLatitude = newSighting.CityLatitude,
-                    CityLongitude = newSighting.CityLongitude
+                    CityLongitude = newSighting.CityLongitude,
+                    Image = newSighting.Image
                 };
 
                 var newSightings = db.QueryFirstOrDefault<Sighting>(insertQuery, parameters);

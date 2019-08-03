@@ -14,10 +14,32 @@ const getAllFavoriteSightings = () => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
-const deleteFavoriteSighting = favoriteSightingId => axios.delete(`${apiUrl}/${favoriteSightingId}`);
+const getSingleFavoriteSighting = (sightingId) => new Promise((resolve, reject) => {
+  axios
+    .get(`${apiUrl}/${sightingId}`)
+    .then((results) => {
+      const favoriteSighting = results.data;
+      resolve(favoriteSighting);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
+
+const deleteFavoriteSighting = (sightingId) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${apiUrl}/${sightingId}`)
+    .then((result) => {
+      resolve(result);
+    })
+    .catch((err) => {
+      reject(err);
+    });
+});
 
 export default {
     createFavoriteSighting,
     deleteFavoriteSighting,
-    getAllFavoriteSightings
+    getAllFavoriteSightings,
+    getSingleFavoriteSighting
 };
