@@ -4,9 +4,17 @@
 
 .navbar-expand-lg {
     margin-bottom: 0px;
+    height: 70px;
 }
 
 .fa-heart {
     color: green;
     margin-left: 10px;
+}
+
+.coverNav {
+    height: 70px;
+    width: 180px;
+    margin-top: -25px;
+    margin-left: -26px;
 }
