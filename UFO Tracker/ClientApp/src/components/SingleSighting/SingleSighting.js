@@ -10,17 +10,18 @@ class SingleSighting extends React.Component {
   render() {
 
     return (
-      <tr>
+      <tr className="sightContainer">
         <td>{this.props.dateOfEvent}</td>
         <td>
             <div>
                 <div>{this.props.city}, {this.props.state}</div>
-                <div>{this.props.streetAddress}</div>
-                <div>{this.props.zipcode}</div>
+                {/* <div>{this.props.streetAddress}</div>
+                <div>{this.props.zipcode}</div> */}
             </div>
         </td>
         <td>{this.props.description}</td>
-        <td> <button id={this.props.sightingId} className="btn-primary" onClick={this.props.deleteFavoriteSighting}>Remove</button></td>
+        <td><img className="singleImage" src={this.props.image}></img></td>
+        <td> <button id={this.props.sightingId} className="btn-danger" onClick={this.props.deleteFavoriteSighting}>Remove</button></td>
       </tr>
     );
   }

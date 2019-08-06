@@ -78,11 +78,11 @@ static propTypes = {
         onChange = {this.addFavoriteSightings}
         />
         <img className='popImage' src={filteredSighting.image}></img>
-        <div>{filteredSighting.description}</div>
-        <div>Date: {filteredSighting.dateOfEvent}</div>
-        <div>Location: {filteredSighting.city}, {filteredSighting.state}</div>
-        <div>Duration: {filteredSighting.duration}</div>
-        <div>Shape: {filteredSighting.shape}</div>
+        <div><b>What happened?</b> {filteredSighting.description}</div>
+        <div><b>Date</b>: {filteredSighting.dateOfEvent}</div>
+        <div><b>Location</b>: {filteredSighting.city}, {filteredSighting.state}</div>
+        <div><b>Duration</b>: {filteredSighting.duration}</div>
+        <div><b>Shape</b>: {filteredSighting.shape}</div>
         </div>
         
       </Popup>
@@ -94,13 +94,14 @@ static propTypes = {
   render() {
 
     return (
+      <div>
       <div className="map-container"> 
       <form class="form-inline my-lg-0 d-flex justify-content-center">
       <SearchField
       placeholder="Search by City or State"
       onChange={ this.onSearchChange }
       searchText=""
-      classNames="test-class w-50"
+      classNames="test-class w-40 mt-3"
         />
       </form>
       <LeafletMap
@@ -114,12 +115,6 @@ static propTypes = {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
-        maxBounds={[
-          //south west
-          [10.712, -94.227],
-          //north east
-          [86.774, -104.125]
-          ]}
         className='custom-popup'
       >
         <TileLayer
@@ -127,6 +122,8 @@ static propTypes = {
         />
         {this.filteredSightingsBuilder()}
       </LeafletMap>
+      </div>
+      <div className="emptyDiv"> . </div>
       </div>
     );
   }

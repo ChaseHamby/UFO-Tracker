@@ -100,7 +100,7 @@ class ReportSighting extends React.Component {
 
     cityLatitudeChange = e => this.formFieldNumberStateSighting('cityLatitude', e);
 
-    cityLongitudeChange = e => this.formFieldNumberStateSighting('cityLongitude', e);
+    cityLongitudeChange = e => this.formFieldStringStateSighting('cityLongitude', e);
 
     imageChange = e => this.formFieldStringStateSighting('image', e);
 
@@ -149,7 +149,8 @@ class ReportSighting extends React.Component {
         const { newSighting, newLocation, newUser } = this.state;
 
         return(
-            <div>
+            <div className="all">
+            <div className= "container">
 
             <div class="sighting-container">
 
@@ -313,14 +314,6 @@ class ReportSighting extends React.Component {
                 </div>
             </div>
             </div>
-            </fieldset>
-            </form>
-            </div>
-
-            <div class="contact-container">
-
-                <form class="well form-horizontal" action=" " method="post"  id="contact_form">
-                <fieldset>
 
                 <legend><center><h2><b>Contact Information</b></h2></center></legend>
 
@@ -391,7 +384,8 @@ class ReportSighting extends React.Component {
                 </div>
                 </fieldset>
                 </form>
-            </div>
+        </div>
+        </div>
         </div>
     )
  }

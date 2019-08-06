@@ -1,3 +1,10 @@
 .td .th {
     margin-left: 50px;
+    opacity: 0.7;
+}
+
+.sightingContainer {
+    background: url(https://coolinterestingstuff.com/wp-content/uploads/2014/03/20140324-210058.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
