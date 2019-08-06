@@ -34,12 +34,12 @@ class LikeButton extends React.Component {
         };
           favoriteSightingRequests.createFavoriteSighting(myFavoriteSighting)
           Swal.fire({
-            title: 'Sighting added!',
+            title: 'Added to your list of favorites!',
             width: 400,
             padding: '3em',
-            background: '#fff url(http://stmedia.stimg.co/ctyp-news-032719-Galactic-Portal.jpg?w=800)',
+            background: '#fff url(https://singularityhub.com/wp-content/uploads/2017/12/alien-evolution-NASA-cauldron-of-stars-galaxy-center-PIA03654-1068x601.jpg)',
             backdrop: `
-              rgba(33,0,66,0.4)
+              rgba(11,0,12,0.4)
               center left
               no-repeat
             `

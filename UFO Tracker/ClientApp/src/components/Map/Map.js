@@ -105,13 +105,14 @@ static propTypes = {
         />
       </form>
       <LeafletMap
-        center={[35, -90]}
-        zoom={4}
+        center={[35, -100]}
+        zoom={3}
         maxZoom={8}
+        setZoom={16}
         attributionControl={true}
         zoomControl={true}
         doubleClickZoom={true}
-        scrollWheelZoom={true}
+        scrollWheelZoom={false}
         dragging={true}
         animate={true}
         easeLinearity={0.35}
