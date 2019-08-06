@@ -53,7 +53,7 @@ class LikeButton extends React.Component {
       render() {
         
           return (
-            <button className="heart btn float-right mb-3" onClick={this.addFavoriteSightings}><i className="fa fa-heart fa-2x"/></button>
+            <button className="rocket btn float-right mb-3" onClick={this.addFavoriteSightings}><i className="fa fa-rocket fa-2x"/></button>
         );
       }
 }

@@ -1,15 +1,20 @@
 .nav-linkRed {
-    color: red;
+    color: rgb(196, 186, 206);
 }
 
 .navbar-expand-lg {
     margin-bottom: 0px;
     height: 70px;
+    color: black;
 }
 
-.fa-heart {
+.fa-rocket {
     color: green;
     margin-left: 10px;
+}
+
+.navbar {
+    background-color: rgb(25, 32, 46);
 }
 
 .coverNav {
@@ -18,3 +23,40 @@
     margin-top: -25px;
     margin-left: -26px;
 }
+
+.storm {
+    color: rgb(184, 174, 174);
+    margin: 2px 0 5px 160px;
+}
+
+/* .counter {
+    margin-left: 300px;
+} */
+
+
+.Countdown{
+    margin: 10px auto;
+    padding-bottom: 20px;
+  }
+  
+  .Countdown-col{
+    display: inline-block;
+  }
+  
+  .Countdown-col-element{
+    display: inline-block;
+    margin: 20px 20px 0px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Countdown-col-element strong{
+    font-size: 25px;
+    color: red;
+  }
+
+  .Countdown-col-element span{
+    font-size: 12px;
+    color: rgb(230, 75, 4);
+  }
+

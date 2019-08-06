@@ -4,12 +4,12 @@
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-    background: red;
+    background:#4682b4;
     color: #234c5e;
 }
 
 .custom-popup .leaflet-popup-content {
-    background: red;
+    background: purple;
 }
 
 .custom-popup .leaflet-popup-tip-container {
@@ -19,6 +19,13 @@
 .popImage {
     height: 150px;
     width: 300px;
+}
+
+.emptyDiv {
+    background: black;
+    margin-top: -20px;
+    margin-bottom: -10px;
+    color: black;
 }
 
 .form {

@@ -43,6 +43,7 @@ class FavoriteSightings extends React.Component {
                 state={favoriteSighting.state}
                 streetAddress={favoriteSighting.streetAddress}
                 zipcode={favoriteSighting.zipcode}
+                image={favoriteSighting.image}
                 deleteFavoriteSighting={this.deleteFavoriteSighting}
               />);
           });
@@ -54,6 +55,7 @@ class FavoriteSightings extends React.Component {
                   <th>Date of Event</th>
                   <th>Location</th>
                   <th>Description</th>
+                  <th>Image</th>
                   <th></th>
                 </tr>
               </thead>

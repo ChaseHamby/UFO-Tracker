@@ -3,10 +3,10 @@
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-    background: red;
+    background: #708090;
     color: #234c5e;
 }
 
 .custom-popup .leaflet-popup-content {
-    background: red;
+    background: #708090;
 }
