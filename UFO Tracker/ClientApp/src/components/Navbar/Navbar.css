@@ -4,11 +4,11 @@
 
 .navbar-expand-lg {
     margin-bottom: 0px;
-    height: 70px;
+    height: 80px;
     color: black;
 }
 
-.fa-rocket {
+.fa-heart {
     color: green;
     margin-left: 10px;
 }
@@ -18,25 +18,26 @@
 }
 
 .coverNav {
-    height: 70px;
-    width: 180px;
+    height: 75px;
+    width: 220px;
     margin-top: -25px;
     margin-left: -26px;
 }
 
 .storm {
     color: rgb(184, 174, 174);
-    margin: 2px 0 5px 160px;
+    margin: 0px 0 5px 95px;
+    font-family: "Courier New", Courier, monospace;
 }
 
-/* .counter {
-    margin-left: 300px;
-} */
+.counter {
+    margin: 0px 0px 25px 200px;
+}
 
 
 .Countdown{
     margin: 10px auto;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
   }
   
   .Countdown-col{
@@ -45,18 +46,19 @@
   
   .Countdown-col-element{
     display: inline-block;
-    margin: 20px 20px 0px 40px;
+    margin: 20px 20px 0px 45px;
     display: flex;
     flex-direction: column;
   }
   
   .Countdown-col-element strong{
-    font-size: 25px;
+    font-size: 20px;
     color: red;
   }
 
   .Countdown-col-element span{
-    font-size: 12px;
+    font-size: 10px;
     color: rgb(230, 75, 4);
   }
+
 

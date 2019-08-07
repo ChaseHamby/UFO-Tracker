@@ -15,15 +15,17 @@ class Navbar extends React.Component {
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h4 className="storm"><b>STORM AREA 51</b></h4>
-            <Countdown date={`${year}-09-20T00:00:00`} />   
+            <div class="counter">
+            <Countdown date={`${year}-09-20T00:00:00`} /> 
+            <h5 className="storm"><b>UNTIL WE STORM AREA 51</b></h5>  
+            </div>
             <div class="navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                 <li class="nav-item mr-5">
                     <a class="nav-linkRed" href="/report"><b>REPORT A SIGHTING</b></a>
                 </li>
                 </ul>
-                <a class="btn" href="/favorites"><i class="fa fa-rocket fa-2x" href="/favorites"></i></a>
+                <a class="btn" href="/favorites"><i class="fa fa-heart fa-2x" href="/favorites"></i></a>
             </div>
         </nav>
         );

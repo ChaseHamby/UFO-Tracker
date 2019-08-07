@@ -3,6 +3,7 @@ import './ReportSighting.css';
 import sightingRequests from '../../helpers/data/sightingRequests';
 import locationRequests from '../../helpers/data/locationRequests';
 import userRequests from '../../helpers/data/userRequests';
+import Swal from 'sweetalert2';
 
     
     const defaultLocation = {
@@ -122,6 +123,17 @@ class ReportSighting extends React.Component {
                     .then((data) => {
                         userRequests.addUser(newUser)
                             .then((data) => {
+                                Swal.fire({
+                                    title: 'Thanks for reporting!',
+                                    width: 300,
+                                    padding: '3em',
+                                    background: '#fff url(https://image.shutterstock.com/image-photo/background-sky-sea-very-calm-260nw-173516552.jpg)',
+                                    backdrop: `
+                                      rgba(11,0,12,0.4)
+                                      center left
+                                      no-repeat
+                                    `
+                                  })
                                 this.setState({
                                     newSighting: defaultSighting,
                                     newLocation: defaultLocation,
@@ -154,7 +166,8 @@ class ReportSighting extends React.Component {
 
             <div class="sighting-container">
 
-            <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+            <form class="well form-horizontal" action=" " autocomplete="off" method="post"  id="contact_form">
+            <input type="hidden" value="something" />
             <fieldset>
 
             <legend><center><h2><b>Report A Sighting</b></h2></center></legend>
@@ -194,7 +207,7 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-            <input name="last_name" placeholder="Duration" class="form-control"  type="text" 
+            <input name="last_name" autocomplete="off" placeholder="Duration" class="form-control"  type="text" 
                 id='duration'
                 value={newSighting.duration}
                 onChange={this.durationChange}
@@ -208,7 +221,7 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-screenshot"></i></span>
-            <input name="email" placeholder="Shape of Object" class="form-control"  type="text" 
+            <input name="email" autocomplete="off" placeholder="Shape of Object" class="form-control"  type="text" 
                 id='shape'
                 value={newSighting.shape}
                 onChange={this.shapeChange}
@@ -222,7 +235,7 @@ class ReportSighting extends React.Component {
             <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input  name="user_name" placeholder="City" class="form-control"  type="text"
+            <input  name="user_name" autocomplete="off" placeholder="City" class="form-control"  type="text"
                 id='city'
                 value={newLocation.city}
                 onChange={this.cityChange}  
@@ -236,7 +249,7 @@ class ReportSighting extends React.Component {
             <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input  name="user_name" placeholder="State" class="form-control"  type="text" 
+            <input  name="user_name" autocomplete="off" placeholder="State" class="form-control"  type="text" 
                 id='state'
                 value={newLocation.state}
                 onChange={this.stateChange}
@@ -250,7 +263,7 @@ class ReportSighting extends React.Component {
             <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input  name="user_name" placeholder="Street Address" class="form-control"  type="text" 
+            <input  name="user_name" autocomplete="off" placeholder="Street Address" class="form-control"  type="text" 
                 id='streetAddress'
                 value={newLocation.streetAddress}
                 onChange={this.streetAddressChange}
@@ -264,7 +277,7 @@ class ReportSighting extends React.Component {
             <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input  name="user_name" placeholder="Zipcode" class="form-control"  type="text" 
+            <input  name="user_name" autocomplete="off" placeholder="Zipcode" class="form-control"  type="text" 
                 id='zipcode'
                 value={newLocation.zipcode}
                 onChange={this.zipcodeChange}
@@ -278,7 +291,7 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input name="contact_no" placeholder="City Latitude" class="form-control" type="text" 
+            <input name="contact_no" autocomplete="off" placeholder="City Latitude" class="form-control" type="text" 
                 id='cityLatitude'
                 value={newSighting.cityLatitude}
                 onChange={this.cityLatitudeChange}
@@ -292,7 +305,7 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-            <input name="contact_no" placeholder="City Longtude" class="form-control" type="text" 
+            <input name="contact_no" autocomplete="off" placeholder="City Longtude" class="form-control" type="text" 
                 id='cityLongitude'
                 value={newSighting.cityLongitude}
                 onChange={this.cityLongitudeChange}
@@ -306,7 +319,7 @@ class ReportSighting extends React.Component {
             <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-            <input  name="image" placeholder="Image URL" class="form-control"  type="text"
+            <input  name="image" autocomplete="off" placeholder="Image URL" class="form-control"  type="text"
                 id='image'
                 value={newSighting.image}
                 onChange={this.imageChange}
@@ -322,7 +335,7 @@ class ReportSighting extends React.Component {
                 <div class="col-md-8 inputGroupContainer">
                 <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input  name="first_name" placeholder="First Name" class="form-control"  type="text" 
+                <input  name="first_name" autocomplete="off" placeholder="First Name" class="form-control"  type="text" 
                     id='firstName'
                     value={newUser.firstName}
                     onChange={this.firstNameChange}
@@ -338,7 +351,7 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input name="last_name" placeholder="Last Name" class="form-control"  type="text" 
+                <input name="last_name" autocomplete="off" placeholder="Last Name" class="form-control"  type="text" 
                     id='lastName'
                     value={newUser.lastName}
                     onChange={this.lastNameChange}
@@ -352,7 +365,7 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input name="email" placeholder="E-Mail Address" class="form-control"  type="text" 
+                <input name="email" autocomplete="off" placeholder="E-Mail Address" class="form-control"  type="text" 
                      id='email'
                      value={newUser.email}
                      onChange={this.emailChange}                 
@@ -368,7 +381,7 @@ class ReportSighting extends React.Component {
                     <div class="col-md-8 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                <input name="contact_no" placeholder="(555)555-5555" class="form-control" type="text" 
+                <input name="contact_no" autocomplete="off" placeholder="(555)555-5555" class="form-control" type="text" 
                      id='cell'
                      value={newUser.cell}
                      onChange={this.cellChange}                 
