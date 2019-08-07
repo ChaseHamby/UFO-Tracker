@@ -72,13 +72,13 @@ static propTypes = {
       duration={filteredSighting.duration}
       shape={filteredSighting.shape}
       >
-        <div>
+        <div className="popper">
         <LikeButton
         sightingId = { filteredSighting.id }
         onChange = {this.addFavoriteSightings}
         />
         <img className='popImage' src={filteredSighting.image}></img>
-        <div><b>What happened?</b> {filteredSighting.description}</div>
+        <div className="descriptionDiv mt-3"><b>What happened?</b> {filteredSighting.description}</div>
         <div><b>Date</b>: {filteredSighting.dateOfEvent}</div>
         <div><b>Location</b>: {filteredSighting.city}, {filteredSighting.state}</div>
         <div><b>Duration</b>: {filteredSighting.duration}</div>

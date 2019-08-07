@@ -25,7 +25,7 @@ class Navbar extends React.Component {
                     <a class="nav-linkRed" href="/report"><b>REPORT A SIGHTING</b></a>
                 </li>
                 </ul>
-                <a class="btn" href="/favorites"><i class="fa fa-rocket fa-2x" href="/favorites"></i></a>
+                <a class="btn" href="/favorites"><i class="fa fa-heart fa-2x" href="/favorites"></i></a>
             </div>
         </nav>
         );

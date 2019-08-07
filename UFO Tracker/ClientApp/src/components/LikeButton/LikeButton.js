@@ -37,7 +37,7 @@ class LikeButton extends React.Component {
             title: 'Added to your list of favorites!',
             width: 400,
             padding: '3em',
-            background: '#fff url(https://singularityhub.com/wp-content/uploads/2017/12/alien-evolution-NASA-cauldron-of-stars-galaxy-center-PIA03654-1068x601.jpg)',
+            background: '#fff url(https://cdn.wallpapersafari.com/65/40/pxtvzG.jpg)',
             backdrop: `
               rgba(11,0,12,0.4)
               center left
@@ -53,7 +53,7 @@ class LikeButton extends React.Component {
       render() {
         
           return (
-            <button className="rocket btn float-right mb-3" onClick={this.addFavoriteSightings}><i className="fa fa-rocket fa-2x"/></button>
+            <button className="rocket btn float-right mb-3" onClick={this.addFavoriteSightings}><i className="fa fa-heart fa-2x"/></button>
         );
       }
 }
